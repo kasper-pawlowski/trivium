@@ -4,8 +4,9 @@ import TriviumLogo from '@assets/triviumLogo.svg';
 import { useUserAuth } from '@contexts/AuthContext';
 
 const Navbar = () => {
-    const { user } = useUserAuth();
-    const { photoURL, displayName } = user;
+    const {
+        user: { photoURL },
+    } = useUserAuth();
 
     return (
         <Wrapper>
