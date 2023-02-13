@@ -16,8 +16,7 @@ const AuthenticatedApp = () => {
         <Layout>
             <Navbar />
             <LayoutContent>
-                <h1>KURWO</h1>
-                <h3>JKK</h3>
+                <h1>asd</h1>
             </LayoutContent>
         </Layout>
     );

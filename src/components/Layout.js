@@ -13,13 +13,4 @@ export const LayoutContent = styled.div`
     background-color: ${({ theme }) => theme.colors.white};
     border-radius: 13px;
     color: ${({ theme }) => theme.colors.dark};
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    h1 {
-        font-size: 80px;
-    }
 `;
