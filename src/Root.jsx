@@ -10,13 +10,16 @@ import Loader from '@components/Loader/Loader';
 import { auth } from '@services/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Layout, LayoutContent } from '@components/Layout';
+import Home from '@pages/Home/Home';
 
 const AuthenticatedApp = () => {
     return (
         <Layout>
             <Navbar />
             <LayoutContent>
-                <h1>asd</h1>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                </Routes>
             </LayoutContent>
         </Layout>
     );
