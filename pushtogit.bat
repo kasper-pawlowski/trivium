@@ -1,11 +1,12 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "current_time=%time%"
-set "current_time=%current_time::=-%"
-set "current_date=%date%"
-set "current_date=%current_date:/=-%"
-set "commit_msg=%current_date% at %current_time%"
+for /f "usebackq tokens=1-6 delims=/: " %%d in (`powershell Get-Date -Format dd-MM-yyyy-HH-mm`) do (
+    set "current_date=%%d-%%e-%%f"
+    set "current_time=%%g:%%h"
+)
+
+set "commit_msg=Automatic commit on %current_date% at %current_time%"
 
 echo %commit_msg%
 
