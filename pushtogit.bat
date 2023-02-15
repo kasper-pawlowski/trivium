@@ -6,7 +6,7 @@ for /f "usebackq tokens=1-6 delims=/: " %%d in (`powershell Get-Date -Format dd-
     set "current_time=%%g:%%h"
 )
 
-set "commit_msg=Automatic commit on %current_date% at %current_time%"
+set "commit_msg=%current_date% - %current_time%"
 
 echo %commit_msg%
 
