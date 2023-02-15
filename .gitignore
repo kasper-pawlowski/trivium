@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-pushtogit
+pushtogit.bat
 .env
 node_modules
 dist
