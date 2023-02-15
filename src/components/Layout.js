@@ -13,4 +13,8 @@ export const LayoutContent = styled.div`
     background-color: ${({ theme }) => theme.colors.white};
     border-radius: 13px;
     color: ${({ theme }) => theme.colors.dark};
+
+    @media screen and (min-width: 768px) {
+        padding: 0 10%;
+    }
 `;
