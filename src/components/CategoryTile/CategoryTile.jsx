@@ -6,6 +6,7 @@ const CategoryTile = ({ categoryName }) => {
         const path = new URL(`@assets/icons/`, import.meta.url).href;
         return `${path}/${categoryName}.svg`;
     };
+    // zamiast dynamicznego ladowania ikon trzeba zrobic to zstatycznie
 
     return (
         <Wrapper>
