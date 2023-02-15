@@ -10,7 +10,6 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body {
-    height: 100%;
     font-family: 'Rubik', sans-serif;
     background-color: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.white};
