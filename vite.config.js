@@ -19,4 +19,12 @@ export default defineConfig({
             { find: '@helpers', replacement: path.resolve(__dirname, 'src/helpers') },
         ],
     },
+    optimizeDeps: {
+        esbuildOptions: {
+            target: 'es2020',
+        },
+    },
+    build: {
+        target: 'es2020',
+    },
 });
