@@ -11,8 +11,8 @@ const TabBar = () => {
 
     return (
         <Wrapper>
-            <LeftCorner src={cornerLeft} alt="" draggable={false} />
-            <RightCorner src={cornerRight} alt="" draggable={false} />
+            <LeftCorner />
+            <RightCorner />
         </Wrapper>
     );
 };

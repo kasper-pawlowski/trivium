@@ -11,14 +11,38 @@ export const Wrapper = styled.div`
     background-color: ${({ theme }) => theme.colors.primary};
 `;
 
-export const LeftCorner = styled.img`
+export const LeftCorner = styled.div`
+    width: 13px;
+    height: 13px;
     position: absolute;
-    top: -12px;
-    left: 13px;
+    top: -13px;
+    left: 14px;
+
+    background-color: ${({ theme }) => theme.colors.primary};
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-bottom-left-radius: 13px;
+        background-color: ${({ theme }) => theme.colors.white};
+    }
 `;
 
-export const RightCorner = styled.img`
+export const RightCorner = styled.div`
+    width: 13px;
+    height: 13px;
     position: absolute;
-    top: -12px;
-    right: 13px;
+    top: -13px;
+    right: 14px;
+
+    background-color: ${({ theme }) => theme.colors.primary};
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-bottom-right-radius: 13px;
+        background-color: ${({ theme }) => theme.colors.white};
+    }
 `;
