@@ -9,7 +9,7 @@ import { useUserAuth } from '@contexts/AuthContext';
 import Loader from '@components/Loader/Loader';
 import { auth } from '@services/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { Layout, LayoutContent } from '@components/Layout';
+import { BottomLabel, Layout, LayoutContent, LeftCorner, RightCorner } from '@components/Layout';
 import Home from '@pages/Home/Home';
 import TabBar from '@components/TabBar/TabBar';
 import { useMediaQuery } from 'react-responsive';
@@ -25,7 +25,15 @@ const AuthenticatedApp = () => {
                     <Route path="/" element={<Home />} />
                 </Routes>
             </LayoutContent>
-            {isMobile && <TabBar />}
+            {isMobile ? (
+                <TabBar />
+            ) : (
+                <>
+                    <BottomLabel />
+                    <LeftCorner />
+                    <RightCorner />
+                </>
+            )}
         </Layout>
     );
 };

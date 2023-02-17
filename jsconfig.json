@@ -8,7 +8,8 @@
             "@styles/*": ["./src/styles/*"],
             "@services/*": ["./src/services/*"],
             "@contexts/*": ["./src/contexts/*"],
-            "@helpers/*": ["./src/helpers/*"]
+            "@helpers/*": ["./src/helpers/*"],
+            "@hooks/*": ["./src/hooks/*"]
         }
     },
     "include": ["src/**/*.js", "src/**/*.jsx"]
