@@ -4,10 +4,11 @@ import TriviumLogo from '@assets/triviumLogo.svg';
 import { useUserAuth } from '@contexts/AuthContext';
 import { useMediaQuery } from 'react-responsive';
 import NavbarDropdown from '@components/NavbarDropdown/NavbarDropdown';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
-
+    const navigate = useNavigate();
     const { user } = useUserAuth();
 
     return (
@@ -17,7 +18,7 @@ const Navbar = () => {
             </StyledLink>
             {!isMobile && (
                 <UserContainer>
-                    <Avatar src={user.photoURL} alt="" draggable={false} />
+                    <Avatar onClick={() => navigate('/profile')} src={user.photoURL} alt="" draggable={false} />
                     <NavbarDropdown user={user} />
                 </UserContainer>
             )}

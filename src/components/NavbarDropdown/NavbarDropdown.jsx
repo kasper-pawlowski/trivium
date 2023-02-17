@@ -1,4 +1,5 @@
 import { useUserAuth } from '@contexts/AuthContext';
+import { AnimatePresence, motion } from 'framer-motion';
 import { LogoutCurve, Profile2User } from 'iconsax-react';
 import React from 'react';
 import { useEffect } from 'react';
@@ -31,22 +32,24 @@ const NavbarDropdown = ({ user }) => {
             <div className="drop" ref={drop}>
                 <StyledArrowDown2 onClick={() => setOpen((open) => !open)} open={open} size="20" variant="Bold" />
             </div>
-            {open && (
-                <Dropdown>
-                    <ProfileSection onClick={() => navigate('/profile')}>
-                        <Avatar src={user.photoURL} alt="" draggable={false} />
-                        <p>{user.displayName}</p>
-                    </ProfileSection>
-                    <Option onClick={() => navigate('/friends')}>
-                        <Profile2User size="15" color="#001833" variant="Outline" />
-                        <p>Friends</p>
-                    </Option>
-                    <Option onClick={logOut}>
-                        <LogoutCurve size="15" color="#001833" variant="Outline" />
-                        <p>Log out</p>
-                    </Option>
-                </Dropdown>
-            )}
+            <AnimatePresence>
+                {open && (
+                    <Dropdown as={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
+                        <ProfileSection onClick={() => navigate('/profile')}>
+                            <Avatar src={user.photoURL} alt="" draggable={false} />
+                            <p>{user.displayName}</p>
+                        </ProfileSection>
+                        <Option onClick={() => navigate('/friends')}>
+                            <Profile2User size="15" color="#001833" variant="Outline" />
+                            <p>Friends</p>
+                        </Option>
+                        <Option onClick={logOut}>
+                            <LogoutCurve size="15" color="#001833" variant="Outline" />
+                            <p>Log out</p>
+                        </Option>
+                    </Dropdown>
+                )}
+            </AnimatePresence>
         </Wrapper>
     );
 };
