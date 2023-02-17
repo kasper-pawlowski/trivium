@@ -16,3 +16,9 @@ export const LeftCorner = styled.img`
     top: -12px;
     left: 13px;
 `;
+
+export const RightCorner = styled.img`
+    position: absolute;
+    top: -12px;
+    right: 13px;
+`;
