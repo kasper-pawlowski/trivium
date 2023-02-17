@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import formatCategoryName from '@helpers/formatCategoryName';
 import CategoryTile from '@components/CategoryTile/CategoryTile';
 import Loader from '@components/Loader/Loader';
-import NoFound from '@assets/illustrations/noFound.svg';
+import noFound from '@assets/illustrations/noFound.svg';
 
 const CategoryList = ({ searchValue }) => {
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -32,7 +32,7 @@ const CategoryList = ({ searchValue }) => {
         </GridWrapper>
     ) : (
         <FlexWrapper>
-            <img src={NoFound} alt="" draggable={false} />
+            <img src={noFound} alt="" draggable={false} />
         </FlexWrapper>
     );
 };
