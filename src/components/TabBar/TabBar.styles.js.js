@@ -13,14 +13,15 @@ export const Wrapper = styled.div`
 
 export const StyledLink = styled(Link)`
     flex: 1;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
 export const Avatar = styled.img`
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
 `;
 
