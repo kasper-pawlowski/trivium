@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
         border-color: ${({ theme }) => theme.colors.primary};
     }
 
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 768px) {
         width: 100%;
     }
 `;
@@ -39,7 +39,7 @@ export const Input = styled.input`
         font-weight: 400;
     }
 
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 768px) {
         width: 100%;
     }
 `;
