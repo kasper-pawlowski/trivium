@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
     background-color: ${({ theme }) => theme.colors.white};
     border-radius: 100vw;
     transition-duration: 0.2s;
+    margin-bottom: 10px;
 
     &:focus-within {
         border-color: ${({ theme }) => theme.colors.primary};
