@@ -24,7 +24,7 @@ export const StyledLink = styled(Link)`
 
 export const Caret = styled(BsFillCaretDownFill)`
     font-size: 14px;
-    color: ${({ theme }) => theme.colors.lightGray};
+    color: ${({ theme }) => theme.colors.lightgray2};
     transition-duration: 0.2s;
 `;
 
@@ -36,7 +36,7 @@ export const UserContainer = styled.div`
     cursor: pointer;
 
     &:hover ${Caret} {
-        color: ${({ theme }) => theme.colors.gray};
+        color: ${({ theme }) => theme.colors.gray2};
     }
     &:active ${Caret} {
         transform: translateY(1px);

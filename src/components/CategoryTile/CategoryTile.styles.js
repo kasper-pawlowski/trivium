@@ -14,6 +14,10 @@ export const Wrapper = styled.div`
     &:hover {
         background-color: ${({ theme }) => theme.colors.lightPurple};
     }
+
+    &:active {
+        transform: translateY(2px);
+    }
 `;
 
 export const IconWrapper = styled.div`

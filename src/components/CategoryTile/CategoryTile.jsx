@@ -6,7 +6,7 @@ const CategoryTile = ({ categoryName }) => {
     return (
         <Wrapper>
             <IconWrapper>
-                <Icon src={getCategoryIcon(categoryName)} alt="" />
+                <Icon src={getCategoryIcon(categoryName)} alt="" draggable={false} />
             </IconWrapper>
             <CategoryName>{categoryName}</CategoryName>
         </Wrapper>

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Wrapper } from './Home.styles';
 import CategoryList from '@components/CategoryList/CategoryList';
+import Search from '@components/Search/Search';
 
 const Home = () => {
+    const [searchValue, setSearchValue] = useState('');
+
     return (
         <Wrapper>
-            <CategoryList />
+            <Search setSearchValue={setSearchValue} />
+            <CategoryList searchValue={searchValue} />
         </Wrapper>
     );
 };

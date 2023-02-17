@@ -1,10 +1,10 @@
 import React from 'react';
 import { Spinner, Wrapper } from './Loader.styles';
 
-const Loader = () => {
+const Loader = ({ isFullHeight, variant }) => {
     return (
-        <Wrapper>
-            <Spinner />
+        <Wrapper {...(isFullHeight === true && { isFullHeight: true })}>
+            <Spinner variant={variant} />
         </Wrapper>
     );
 };

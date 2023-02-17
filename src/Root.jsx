@@ -38,7 +38,7 @@ const Root = () => {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            {isReady ? user !== null ? <AuthenticatedApp /> : <Login /> : <Loader />}
+            {isReady ? user !== null ? <AuthenticatedApp /> : <Login /> : <Loader isFullHeight variant="secondary" />}
         </ThemeProvider>
     );
 };

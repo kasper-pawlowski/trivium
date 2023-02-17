@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const GridWrapper = styled.div`
     width: 100%;
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+`;
+
+export const FlexWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
 `;
