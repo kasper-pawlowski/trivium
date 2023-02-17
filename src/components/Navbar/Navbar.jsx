@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Caret, StyledLink, UserContainer, Wrapper } from './Navbar.styles';
+import { Avatar, StyledArrowDown2, StyledLink, UserContainer, Wrapper } from './Navbar.styles';
 import TriviumLogo from '@assets/triviumLogo.svg';
 import { useUserAuth } from '@contexts/AuthContext';
 import { useMediaQuery } from 'react-responsive';
@@ -19,7 +19,7 @@ const Navbar = () => {
             {!isMobile && (
                 <UserContainer>
                     <Avatar src={photoURL} alt="" draggable={false} />
-                    <Caret />
+                    <StyledArrowDown2 size="20" variant="Bold" />
                 </UserContainer>
             )}
         </Wrapper>

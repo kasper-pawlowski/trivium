@@ -11,13 +11,25 @@ export const Wrapper = styled.div`
     background-color: ${({ theme }) => theme.colors.primary};
 `;
 
+export const StyledLink = styled(Link)`
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const Avatar = styled.img`
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+`;
+
 export const LeftCorner = styled.div`
     width: 13px;
     height: 13px;
     position: absolute;
     top: -13px;
     left: 14px;
-
     background-color: ${({ theme }) => theme.colors.primary};
     &::after {
         content: '';

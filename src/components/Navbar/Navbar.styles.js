@@ -1,6 +1,6 @@
+import { ArrowDown2 } from 'iconsax-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { BsFillCaretDownFill } from 'react-icons/bs';
 
 export const Wrapper = styled.div`
     width: 100%;
@@ -22,8 +22,7 @@ export const StyledLink = styled(Link)`
     }
 `;
 
-export const Caret = styled(BsFillCaretDownFill)`
-    font-size: 14px;
+export const StyledArrowDown2 = styled(ArrowDown2)`
     color: ${({ theme }) => theme.colors.lightgray2};
     transition-duration: 0.2s;
 `;
@@ -35,10 +34,10 @@ export const UserContainer = styled.div`
     gap: 10px;
     cursor: pointer;
 
-    &:hover ${Caret} {
+    &:hover ${StyledArrowDown2} {
         color: ${({ theme }) => theme.colors.gray2};
     }
-    &:active ${Caret} {
+    &:active ${StyledArrowDown2} {
         transform: translateY(1px);
     }
 `;
