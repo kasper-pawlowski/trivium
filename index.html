@@ -12,6 +12,10 @@
     <body>
         <div id="root"></div>
         <script type="module" src="/src/main.jsx"></script>
-        <script type="text/javascript"></script>
+        <script type="text/javascript">
+            if ('virtualKeyboard' in navigator) {
+                navigator.virtualKeyboard.overlaysContent = true;
+            }
+        </script>
     </body>
 </html>

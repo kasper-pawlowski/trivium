@@ -11,8 +11,12 @@ import { auth } from '@services/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Layout, LayoutContent } from '@components/Layout';
 import Home from '@pages/Home/Home';
+import TabBar from '@components/TabBar/TabBar';
+import { useMediaQuery } from 'react-responsive';
 
 const AuthenticatedApp = () => {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+
     return (
         <Layout>
             <Navbar />
@@ -21,6 +25,7 @@ const AuthenticatedApp = () => {
                     <Route path="/" element={<Home />} />
                 </Routes>
             </LayoutContent>
+            {isMobile && <TabBar />}
         </Layout>
     );
 };
