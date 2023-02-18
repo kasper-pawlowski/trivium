@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
     align-items: center;
     position: relative;
     user-select: none;
+    z-index: 999;
 
     .drop {
         display: flex;
