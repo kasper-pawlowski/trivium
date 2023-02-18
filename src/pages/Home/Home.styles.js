@@ -25,13 +25,14 @@ export const Logo = styled.img`
 
 export const H1 = styled.h1`
     color: ${({ theme }) => theme.colors.primary};
-    font-size: 34px;
+    font-size: 30px;
 `;
 
 export const H2 = styled.p`
     width: 70%;
-    color: ${({ theme }) => theme.colors.gray};
-    font-size: 18px;
+    color: ${({ theme }) => theme.colors.lightPrimary};
+    font-weight: 400;
+    font-size: 17px;
     margin-bottom: 40px;
     text-align: center;
     @media screen and (max-width: 768px) {

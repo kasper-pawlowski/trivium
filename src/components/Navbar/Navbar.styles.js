@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
     height: 56px;
     padding: 10px 14px;
     @media screen and (max-width: 768px) {
-        gap: 20px;
+        gap: 50px;
     }
 `;
 

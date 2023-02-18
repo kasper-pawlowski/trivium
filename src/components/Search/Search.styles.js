@@ -5,21 +5,14 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     padding: 9px 20px;
-    /* border: 2px solid ${({ theme }) => theme.colors.lightPurple}; */
     background-color: ${({ theme }) => theme.colors.lightPrimary};
     border-radius: 100vw;
     transition-duration: 0.2s;
 
-    /* &:focus-within {
-        border-color: ${({ theme }) => theme.colors.primary};
-    } */
-
     @media screen and (max-width: 768px) {
-        gap: 20px;
         width: 100%;
-        /* display: none; */
     }
 `;
 
