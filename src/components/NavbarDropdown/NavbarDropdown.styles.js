@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 `;
 
 export const StyledArrowDown2 = styled(ArrowDown2)`
-    color: ${({ theme }) => theme.colors.lightgray2};
+    color: ${({ theme }) => theme.colors.lightPurple};
     transition-duration: 0.2s;
     scale: ${({ open }) => (open ? '1 -1' : '-1 1')};
     cursor: pointer;

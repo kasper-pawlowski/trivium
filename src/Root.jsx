@@ -13,6 +13,8 @@ import { BottomLabel, Layout, LayoutContent, LeftCorner, RightCorner } from '@co
 import Home from '@pages/Home/Home';
 import TabBar from '@components/TabBar/TabBar';
 import { useMediaQuery } from 'react-responsive';
+import Category from '@pages/Category/Category';
+import { GameContextProvider } from '@contexts/GameContext';
 
 const AuthenticatedApp = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -20,21 +22,24 @@ const AuthenticatedApp = () => {
 
     return (
         <Layout>
-            <Navbar searchValue={searchValue} setSearchValue={setSearchValue} />
-            <LayoutContent>
-                <Routes>
-                    <Route path="/" element={<Home searchValue={searchValue} />} />
-                </Routes>
-            </LayoutContent>
-            {isMobile ? (
-                <TabBar />
-            ) : (
-                <>
-                    <BottomLabel />
-                    <LeftCorner />
-                    <RightCorner />
-                </>
-            )}
+            <GameContextProvider>
+                <Navbar searchValue={searchValue} setSearchValue={setSearchValue} />
+                <LayoutContent>
+                    <Routes>
+                        <Route path="/" element={<Home searchValue={searchValue} />} />
+                        <Route path="/category/:categoryId" element={<Category />} />
+                    </Routes>
+                </LayoutContent>
+                {isMobile ? (
+                    <TabBar />
+                ) : (
+                    <>
+                        <BottomLabel />
+                        <LeftCorner />
+                        <RightCorner />
+                    </>
+                )}
+            </GameContextProvider>
         </Layout>
     );
 };

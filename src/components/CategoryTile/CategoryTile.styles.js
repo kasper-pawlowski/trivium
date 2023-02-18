@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Link)`
     background-color: ${({ theme }) => theme.colors.lightPurple2};
     display: flex;
     flex-direction: column;

@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
     gap: 20px;
     padding: 20px 20px 30% 20px;
     @media screen and (min-width: 768px) {
-        padding: 40px;
+        padding: 40px 10%;
     }
 `;
 
@@ -23,12 +23,12 @@ export const Logo = styled.img`
     }
 `;
 
-export const H1 = styled.h1`
+export const TriviumTitle = styled.h1`
     color: ${({ theme }) => theme.colors.primary};
     font-size: 30px;
 `;
 
-export const H2 = styled.p`
+export const TriviumDescription = styled.p`
     width: 70%;
     color: ${({ theme }) => theme.colors.lightPrimary};
     font-weight: 400;

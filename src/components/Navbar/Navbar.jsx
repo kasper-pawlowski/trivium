@@ -4,12 +4,13 @@ import TriviumLogo from '@assets/triviumLogo.svg';
 import { useUserAuth } from '@contexts/AuthContext';
 import { useMediaQuery } from 'react-responsive';
 import NavbarDropdown from '@components/NavbarDropdown/NavbarDropdown';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Search from '@components/Search/Search';
 
 const Navbar = ({ searchValue, setSearchValue }) => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const navigate = useNavigate();
+    const location = useLocation();
     const { user } = useUserAuth();
 
     return (
@@ -17,15 +18,15 @@ const Navbar = ({ searchValue, setSearchValue }) => {
             <StyledLink to="/">
                 <img src={TriviumLogo} alt="" draggable={false} />
             </StyledLink>
-            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+            {location.pathname === '/' && <Search searchValue={searchValue} setSearchValue={setSearchValue} />}
             {!isMobile && (
                 <UserContainer>
-                    <Avatar onClick={() => navigate('/profile')} src={user.photoURL} alt="" draggable={false} />
+                    <Avatar onClick={() => navigate('/profile')} src={user.photoURL} alt="" draggable={false} referrerPolicy="no-referrer" />
                     <NavbarDropdown user={user} />
                 </UserContainer>
             )}
-            <LeftCorner />
-            <RightCorner />
+            {/* <LeftCorner />
+            <RightCorner /> */}
         </Wrapper>
     );
 };

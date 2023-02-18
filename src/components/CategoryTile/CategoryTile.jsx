@@ -1,14 +1,18 @@
+import { useGameCtx } from '@contexts/GameContext';
+import formatCategoryName from '@helpers/formatCategoryName';
 import getCategoryIcon from '@helpers/getCategoryIcon';
 import React from 'react';
 import { CategoryName, Icon, IconWrapper, Wrapper } from './CategoryTile.styles';
 
-const CategoryTile = ({ categoryName }) => {
+const CategoryTile = ({ category }) => {
+    const { setSelectedCategory } = useGameCtx();
+
     return (
-        <Wrapper>
+        <Wrapper to={`/category/${category.id}`} onClick={() => setSelectedCategory(category)}>
             <IconWrapper>
-                <Icon src={getCategoryIcon(categoryName)} alt="" draggable={false} />
+                <Icon src={getCategoryIcon(formatCategoryName(category.name))} alt="" draggable={false} />
             </IconWrapper>
-            <CategoryName>{categoryName}</CategoryName>
+            <CategoryName>{formatCategoryName(category.name)}</CategoryName>
         </Wrapper>
     );
 };

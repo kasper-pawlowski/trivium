@@ -1,13 +1,12 @@
 import React from 'react';
 import { FlexWrapper, GridWrapper } from './CategoryList.styles';
 import useSWR from 'swr';
-import formatCategoryName from '@helpers/formatCategoryName';
 import CategoryTile from '@components/CategoryTile/CategoryTile';
 import Loader from '@components/Loader/Loader';
 import noFound from '@assets/illustrations/noFound.svg';
+import fetcher from '@helpers/fetcher';
 
 const CategoryList = ({ searchValue }) => {
-    const fetcher = (...args) => fetch(...args).then((res) => res.json());
     const { data, error, isLoading } = useSWR('https://opentdb.com/api_category.php', fetcher);
 
     if (error) return <div>failed to load</div>;
@@ -27,7 +26,7 @@ const CategoryList = ({ searchValue }) => {
     return categories ? (
         <GridWrapper>
             {categories.map((category) => (
-                <CategoryTile key={category.id} categoryName={formatCategoryName(category.name)} />
+                <CategoryTile key={category.id} category={category} />
             ))}
         </GridWrapper>
     ) : (
