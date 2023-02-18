@@ -7,6 +7,7 @@ export const theme = {
         lightgray2: '#ebebeb',
         dark: '#001833',
         primary: '#6A5AE0',
+        lightPrimary: ' #a699fa',
         lightPurple: '#e4e3f1',
         lightPurple2: '#EFEEFC',
         pink: '#FF8FA2',

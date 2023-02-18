@@ -16,13 +16,14 @@ import { useMediaQuery } from 'react-responsive';
 
 const AuthenticatedApp = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+    const [searchValue, setSearchValue] = useState('');
 
     return (
         <Layout>
-            <Navbar />
+            <Navbar searchValue={searchValue} setSearchValue={setSearchValue} />
             <LayoutContent>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home searchValue={searchValue} />} />
                 </Routes>
             </LayoutContent>
             {isMobile ? (

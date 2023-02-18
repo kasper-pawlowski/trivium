@@ -6,37 +6,38 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: 12px;
-    padding: 12px 20px;
-    border: 2px solid ${({ theme }) => theme.colors.lightPurple};
-    background-color: ${({ theme }) => theme.colors.white};
+    padding: 9px 20px;
+    /* border: 2px solid ${({ theme }) => theme.colors.lightPurple}; */
+    background-color: ${({ theme }) => theme.colors.lightPrimary};
     border-radius: 100vw;
     transition-duration: 0.2s;
-    margin-bottom: 10px;
 
-    &:focus-within {
+    /* &:focus-within {
         border-color: ${({ theme }) => theme.colors.primary};
-    }
+    } */
 
     @media screen and (max-width: 768px) {
+        gap: 20px;
         width: 100%;
+        /* display: none; */
     }
 `;
 
 export const Icon = styled(FiSearch)`
-    color: ${({ theme }) => theme.colors.gray};
+    color: ${({ theme }) => theme.colors.lightPurple};
 `;
 
 export const Input = styled.input`
     width: 260px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 400;
     background: none;
     border: none;
     outline: none;
-    color: ${({ theme }) => theme.colors.dark};
+    color: ${({ theme }) => theme.colors.white};
 
     &::placeholder {
-        color: ${({ theme }) => theme.colors.gray};
+        color: ${({ theme }) => theme.colors.lightPurple};
         font-weight: 400;
     }
 

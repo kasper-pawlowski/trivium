@@ -11,9 +11,13 @@ export const Wrapper = styled.div`
     align-items: center;
     height: 56px;
     padding: 10px 14px;
+    @media screen and (max-width: 768px) {
+        gap: 20px;
+    }
 `;
 
 export const StyledLink = styled(Link)`
+    flex: 1;
     height: 100%;
     transition-duration: 0.2s;
     &:active {
@@ -25,9 +29,11 @@ export const StyledLink = styled(Link)`
 `;
 
 export const UserContainer = styled.div`
+    flex: 1;
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 10px;
 `;
 

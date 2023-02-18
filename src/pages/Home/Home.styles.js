@@ -13,8 +13,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Logo = styled.img`
-    width: 100px;
-    border-radius: 26px;
+    width: 70px;
+    border-radius: 17px;
     box-shadow: rgba(34, 34, 34, 0.137) 0px 3px 8px;
     cursor: context-menu;
     transition-duration: 0.2s;

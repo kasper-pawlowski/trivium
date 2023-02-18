@@ -5,8 +5,9 @@ import { useUserAuth } from '@contexts/AuthContext';
 import { useMediaQuery } from 'react-responsive';
 import NavbarDropdown from '@components/NavbarDropdown/NavbarDropdown';
 import { useNavigate } from 'react-router-dom';
+import Search from '@components/Search/Search';
 
-const Navbar = () => {
+const Navbar = ({ searchValue, setSearchValue }) => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const navigate = useNavigate();
     const { user } = useUserAuth();
@@ -16,6 +17,7 @@ const Navbar = () => {
             <StyledLink to="/">
                 <img src={TriviumLogo} alt="" draggable={false} />
             </StyledLink>
+            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
             {!isMobile && (
                 <UserContainer>
                     <Avatar onClick={() => navigate('/profile')} src={user.photoURL} alt="" draggable={false} />
