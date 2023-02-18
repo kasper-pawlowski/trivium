@@ -26,12 +26,12 @@ export const IconWrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding: 20px;
-    border-radius: 34px;
+    border-radius: 26px;
 `;
 
 export const Icon = styled.img`
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
 `;
 
 export const CategoryName = styled.p`
