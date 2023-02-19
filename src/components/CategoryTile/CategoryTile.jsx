@@ -8,7 +8,7 @@ const CategoryTile = ({ category }) => {
     const { setSelectedCategory } = useGameCtx();
 
     return (
-        <Wrapper to={`/category/${category.id}`} onClick={() => setSelectedCategory(category)}>
+        <Wrapper to="/category" onClick={() => setSelectedCategory(category)}>
             <IconWrapper>
                 <Icon src={getCategoryIcon(formatCategoryName(category.name))} alt="" draggable={false} />
             </IconWrapper>

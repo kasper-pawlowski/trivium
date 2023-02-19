@@ -16,12 +16,10 @@ const Login = () => {
             if (docs.docs.length === 0) {
                 let randomUid = Math.floor(1000 + Math.random() * 9000).toString();
 
-                // Check if uid exists in Firestore collection
                 let randomUidQuery = query(collection(db, 'users'), where('uid', '==', randomUid));
                 let querySnapshot = await getDocs(randomUidQuery);
 
                 if (querySnapshot.size > 0) {
-                    // If uid already exists, generate a new one and check again
                     while (querySnapshot.size > 0) {
                         randomUid = Math.floor(1000 + Math.random() * 9000).toString();
                         randomUidQuery = query(collection(db, 'users'), where('uid', '==', randomUid));

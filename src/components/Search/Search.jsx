@@ -1,10 +1,11 @@
+import { SearchNormal1 } from 'iconsax-react';
 import React from 'react';
-import { Icon, Input, Wrapper } from './Search.styles';
+import { Input, Wrapper } from './Search.styles';
 
 const Search = ({ setSearchValue }) => {
     return (
         <Wrapper>
-            <Icon />
+            <SearchNormal1 size="16" color="#e4e3f1" variant="Outline" />
             <Input type="text" placeholder="Search quizzes" onChange={(e) => setSearchValue(e.target.value)} />
         </Wrapper>
     );

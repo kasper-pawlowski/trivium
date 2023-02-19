@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
     align-items: center;
     position: relative;
     user-select: none;
-    z-index: 999;
 
     .drop {
         display: flex;
@@ -43,22 +42,54 @@ export const ProfileSection = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 12px;
     padding: 20px;
     border-bottom: 1px solid ${({ theme }) => theme.colors.lightPurple};
-    cursor: pointer;
-
-    p {
-        font-size: 14px;
-        font-weight: 500;
-        white-space: nowrap;
-    }
 `;
 
 export const Avatar = styled.img`
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    margin-bottom: 10px;
+    cursor: pointer;
+`;
+
+export const Name = styled.p`
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-bottom: 6px;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
+export const Uid = styled.p`
+    font-size: 16px;
+    font-weight: 400;
+    color: ${({ theme }) => theme.colors.lightDark};
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition-duration: 0.2s;
+
+    p {
+        margin-left: 16px;
+    }
+
+    &:hover span {
+        opacity: 1;
+    }
+
+    span {
+        transition-duration: 0.2s;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+    }
 `;
 
 export const Option = styled.button`

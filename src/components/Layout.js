@@ -12,6 +12,9 @@ export const LayoutContent = styled.div`
     margin: 56px 14px 14px 14px;
     background-color: ${({ theme }) => theme.colors.white};
     color: ${({ theme }) => theme.colors.dark};
+    @media screen and (min-width: 768px) {
+        padding: 40px 10%;
+    }
 `;
 
 export const BottomLabel = styled.div`

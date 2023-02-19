@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FiSearch } from 'react-icons/fi';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -14,10 +13,6 @@ export const Wrapper = styled.div`
     @media screen and (max-width: 768px) {
         width: 100%;
     }
-`;
-
-export const Icon = styled(FiSearch)`
-    color: ${({ theme }) => theme.colors.lightPurple};
 `;
 
 export const Input = styled.input`

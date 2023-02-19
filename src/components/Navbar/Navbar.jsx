@@ -25,8 +25,8 @@ const Navbar = ({ searchValue, setSearchValue }) => {
                     <NavbarDropdown user={user} />
                 </UserContainer>
             )}
-            {/* <LeftCorner />
-            <RightCorner /> */}
+            <LeftCorner />
+            <RightCorner />
         </Wrapper>
     );
 };

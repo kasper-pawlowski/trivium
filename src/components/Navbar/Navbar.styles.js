@@ -1,4 +1,3 @@
-import { ArrowDown2 } from 'iconsax-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,6 +10,7 @@ export const Wrapper = styled.div`
     align-items: center;
     height: 56px;
     padding: 10px 14px;
+    z-index: 3;
     @media screen and (max-width: 768px) {
         gap: 50px;
     }
