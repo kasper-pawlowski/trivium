@@ -1,3 +1,4 @@
+import StyledButton from '@components/StyledButton';
 import { useGameCtx } from '@contexts/GameContext';
 import formatCategoryName from '@helpers/formatCategoryName';
 import getCategoryIcon from '@helpers/getCategoryIcon';
@@ -17,6 +18,7 @@ const Category = () => {
                 </IconWrapper>
                 <CategoryName>{formatCategoryName(selectedCategory.name)}</CategoryName>
             </CategoryInfoWrapper>
+            {/* <StyledButton variant="primary">Play</StyledButton> */}
         </Wrapper>
     );
 };

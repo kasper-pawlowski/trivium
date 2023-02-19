@@ -42,7 +42,7 @@ const Login = () => {
     return (
         <Wrapper>
             <Logo draggable={false} src={triviumLogoWithText} alt="" />
-            <StyledButton onClick={signInWithGoogle}>
+            <StyledButton variant="secondary" onClick={signInWithGoogle}>
                 <StyledFcGoogle /> Login with Google
             </StyledButton>
         </Wrapper>

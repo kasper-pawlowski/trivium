@@ -1,11 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
     color: ${({ theme }) => theme.colors.dark};
-    background-color: ${({ theme }) => theme.colors.white};
     padding: 14px 40px;
     font-size: 16px;
     font-weight: 600;
@@ -13,6 +12,8 @@ const StyledButton = styled.button`
     border-radius: 13px;
     gap: 10px;
     transition-duration: 0.2s;
+    ${({ theme, variant }) => variant === 'primary' && `background-color: ${theme.colors.primary};`};
+    ${({ theme, variant }) => variant === 'secondary' && `background-color: ${theme.colors.white};`};
 
     &:active {
         transform: translateY(2px);
