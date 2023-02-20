@@ -1,4 +1,5 @@
 import { useUserAuth } from '@contexts/AuthContext';
+import useCopyUidToClipboard from '@hooks/useCopyUidToClipboard';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Copy, CopySuccess, LogoutCurve, Profile2User } from 'iconsax-react';
@@ -6,23 +7,15 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Dropdown, Name, Option, ProfileSection, StyledArrowDown2, Uid, Wrapper } from './NavbarDropdown.styles';
 
-const NavbarDropdown = ({ user }) => {
+const NavbarDropdown = () => {
+    const { copyUidToClipboard, copied } = useCopyUidToClipboard();
     const [open, setOpen] = useState(false);
-    const [copied, setCopied] = useState(false);
     const drop = useRef(null);
     const uidRef = useRef(null);
-    const { logOut } = useUserAuth();
+    const { logOut, user } = useUserAuth();
     const navigate = useNavigate();
 
     useOnClickOutside(drop, () => setOpen(false));
-
-    const copyUidToClipboard = (e) => {
-        navigator.clipboard.writeText(user.uid);
-        setCopied(true);
-        setTimeout(function () {
-            setCopied(false);
-        }, 1000);
-    };
 
     return (
         <Wrapper>
@@ -39,9 +32,9 @@ const NavbarDropdown = ({ user }) => {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.1 }}>
                         <ProfileSection>
-                            <Avatar onClick={() => (navigate('/profile'), setOpen(false))} src={user.photoURL} alt="" draggable={false} />
-                            <Name onClick={() => (navigate('/profile'), setOpen(false))}>{user.displayName}</Name>
-                            <Uid onClick={copyUidToClipboard} ref={uidRef}>
+                            <Avatar onClick={() => (navigate(`/user/${user.uid}`), setOpen(false))} src={user.photoURL} alt="" draggable={false} />
+                            <Name onClick={() => (navigate(`/user/${user.uid}`), setOpen(false))}>{user.displayName}</Name>
+                            <Uid onClick={() => copyUidToClipboard(user)} ref={uidRef}>
                                 <p>#{user.uid}</p>
                                 <span>
                                     {copied ? <CopySuccess color="#6A5AE0" size="16" variant="Outline" /> : <Copy size="16" variant="Outline" />}

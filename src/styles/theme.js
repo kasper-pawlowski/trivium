@@ -10,6 +10,8 @@ export const theme = {
         lightPrimary: ' #a699fa',
         lightPurple: '#e4e3f1',
         lightPurple2: '#EFEEFC',
+        deepRed: '#660012',
         pink: '#FF8FA2',
+        lightPink: '#ffe0e6',
     },
 };

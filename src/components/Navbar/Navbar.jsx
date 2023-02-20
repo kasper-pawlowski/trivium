@@ -21,7 +21,7 @@ const Navbar = ({ searchValue, setSearchValue }) => {
             {location.pathname === '/' && <Search searchValue={searchValue} setSearchValue={setSearchValue} />}
             {!isMobile && (
                 <UserContainer>
-                    <Avatar onClick={() => navigate('/profile')} src={user.photoURL} alt="" draggable={false} referrerPolicy="no-referrer" />
+                    <Avatar onClick={() => navigate(`/user/${user.uid}`)} src={user.photoURL} alt="" draggable={false} referrerPolicy="no-referrer" />
                     <NavbarDropdown user={user} />
                 </UserContainer>
             )}

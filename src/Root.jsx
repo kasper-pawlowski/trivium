@@ -16,6 +16,7 @@ import { useMediaQuery } from 'react-responsive';
 import Category from '@pages/Category/Category';
 import { GameContextProvider } from '@contexts/GameContext';
 import Friends from '@pages/Friends/Friends';
+import User from '@pages/User/User';
 
 const AuthenticatedApp = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -30,6 +31,7 @@ const AuthenticatedApp = () => {
                         <Route path="/" element={<Home searchValue={searchValue} />} />
                         <Route path="/category" element={<Category />} />
                         <Route path="/friends" element={<Friends />} />
+                        <Route path="/user/:uid" element={<User />} />
                     </Routes>
                 </LayoutContent>
                 {isMobile ? (
