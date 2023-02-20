@@ -16,7 +16,7 @@ export const InfoWrapper = styled.div`
 
 export const Avatar = styled.img`
     border-radius: 50%;
-    width: 120px;
+    width: 110px;
     margin-bottom: 30px;
 `;
 

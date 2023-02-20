@@ -14,11 +14,6 @@ export const Seperator = styled.div`
     background: linear-gradient(90deg, rgba(15, 17, 21, 0) 0%, #c5bef3 35%, #c5bef3 65%, rgba(255, 255, 255, 0) 100%);
 `;
 
-export const Header = styled.div`
-    display: flex;
-    gap: 20px;
-`;
-
 export const AppInfo = styled.div`
     display: flex;
     flex-direction: column;
@@ -52,21 +47,4 @@ export const TriviumDescription = styled.p`
     @media screen and (max-width: 768px) {
         width: 100%;
     }
-`;
-
-export const ChallengeWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 500px;
-    border-radius: 13px;
-    padding: 20px;
-    background-color: ${({ theme }) => theme.colors.lightPink};
-    border: 1px solid ${({ theme }) => theme.colors.pink};
-`;
-
-export const ChallengeTitle = styled.p`
-    color: ${({ theme }) => theme.colors.deepRed};
-    font-size: 20px;
-    font-weight: 500;
 `;
