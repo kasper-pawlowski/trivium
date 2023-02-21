@@ -66,7 +66,7 @@ export const Name = styled.p`
     }
 `;
 
-export const Uid = styled.p`
+export const Uid = styled.div`
     font-size: 16px;
     font-weight: 400;
     color: ${({ theme }) => theme.colors.lightDark};

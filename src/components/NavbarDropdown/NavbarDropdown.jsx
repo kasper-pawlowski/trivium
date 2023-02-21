@@ -45,7 +45,7 @@ const NavbarDropdown = () => {
                             <Profile2User size="15" color="#001833" variant="Outline" />
                             <p>Friends</p>
                         </Option>
-                        <Option onClick={() => (logOut(), setOpen(false))}>
+                        <Option onClick={() => (logOut(), setOpen(false), navigate('/'))}>
                             <LogoutCurve size="15" color="#001833" variant="Outline" />
                             <p>Log out</p>
                         </Option>

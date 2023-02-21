@@ -1,14 +1,13 @@
+import React, { useEffect, useState } from 'react';
 import Loader from '@components/Loader/Loader';
-import { useUserAuth } from '@contexts/AuthContext';
 import useCopyUidToClipboard from '@hooks/useCopyUidToClipboard';
+import { useUserAuth } from '@contexts/AuthContext';
 import { db } from '@services/firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { Copy, CopySuccess } from 'iconsax-react';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Avatar, DisplayName, InfoWrapper, Uid, Wrapper } from './User.styles';
+import StyledButton from '@components/StyledButton';
 
 const User = () => {
     const { copyUidToClipboard, copied } = useCopyUidToClipboard();
@@ -16,25 +15,35 @@ const User = () => {
     const [loading, isLoading] = useState(true);
     const { uid } = useParams();
     const { user } = useUserAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user.uid == uid) {
             setData(user);
             isLoading(false);
         } else {
-            const docRef = doc(db, 'users', uid);
+            const q = query(collection(db, 'users'), where('uid', '==', uid));
             const getUser = async () => {
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    setData(docSnap.data());
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    setData(querySnapshot.docs[0].data());
                     isLoading(false);
                 } else {
                     console.log('No such document!');
+                    navigate('/');
                 }
             };
             getUser();
         }
     }, [user, uid]);
+
+    // const addUserToFriends = async () => {
+    //     const docRef = await addDoc(collection(db, 'users', 'wyafRsFpDZZjfV5eZJ14YStDa1L2', 'friends'), {
+    //         ...data,
+    //         status: 'accepted',
+    //     });
+    //     console.log('Document written with ID: ', docRef.id);
+    // };
 
     if (loading)
         return (
@@ -52,6 +61,12 @@ const User = () => {
                     <span>{copied ? <CopySuccess color="#6A5AE0" size="16" variant="Outline" /> : <Copy size="16" variant="Outline" />}</span>
                 </Uid>
             </InfoWrapper>
+            {/* <button onClick={addUserToFriends}>asdasdasasdasd</button> */}
+            {user.uid == uid && (
+                <StyledButton onClick={() => navigate(`/friends`)} variant="primary">
+                    Friends
+                </StyledButton>
+            )}
         </Wrapper>
     );
 };

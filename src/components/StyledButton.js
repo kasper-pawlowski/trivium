@@ -12,7 +12,7 @@ const StyledButton = styled.button`
     border-radius: 13px;
     gap: 10px;
     transition-duration: 0.2s;
-    ${({ theme, variant }) => variant === 'primary' && `background-color: ${theme.colors.primary};`};
+    ${({ theme, variant }) => variant === 'primary' && `background-color: ${theme.colors.primary}; color: ${theme.colors.white};`};
     ${({ theme, variant }) => variant === 'secondary' && `background-color: ${theme.colors.white};`};
 
     &:active {

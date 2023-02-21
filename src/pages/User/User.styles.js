@@ -27,7 +27,7 @@ export const DisplayName = styled.p`
     margin-bottom: 10px;
 `;
 
-export const Uid = styled.p`
+export const Uid = styled.div`
     font-size: 22px;
     font-weight: 500;
     color: ${({ theme }) => theme.colors.lightDark};
