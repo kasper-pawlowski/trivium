@@ -6,8 +6,12 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    padding-left: 14%;
-    padding-right: 14%;
+    @media screen and (min-width: 1000px) {
+        padding: 0 10%;
+    }
+    @media screen and (min-width: 1400px) {
+        padding: 0 16%;
+    }
 `;
 
 export const Title = styled.p`
@@ -19,6 +23,9 @@ export const Title = styled.p`
 export const Grid = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0px, 1fr));
     grid-gap: 20px;
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    @media screen and (max-width: 768px) {
+        grid-template-columns: repeat(1, minmax(0px, 1fr));
+    }
 `;

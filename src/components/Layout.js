@@ -12,8 +12,9 @@ export const LayoutContent = styled.div`
     margin: 56px 14px 14px 14px;
     background-color: ${({ theme }) => theme.colors.white};
     color: ${({ theme }) => theme.colors.dark};
-    @media screen and (min-width: 768px) {
-        padding: 40px 10%;
+    padding: 40px 10%;
+    @media screen and (max-width: 768px) {
+        padding: 20px 20px 80px 20px;
     }
 `;
 

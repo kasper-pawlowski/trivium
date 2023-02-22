@@ -8,7 +8,7 @@ const TabBar = () => {
     const location = useLocation();
     const { pathname } = location;
     const {
-        user: { photoURL },
+        user: { photoURL, uid },
     } = useUserAuth();
 
     return (
@@ -22,7 +22,7 @@ const TabBar = () => {
             <StyledLink to="/notifications">
                 <Notification size="20" color="#fff" variant={pathname === '/notifications' ? 'Bold' : 'Outline'} />
             </StyledLink>
-            <StyledLink to="/profile">
+            <StyledLink to={`/user/${uid}`}>
                 <Avatar src={photoURL} alt="" draggable={false} />
             </StyledLink>
             <LeftCorner />
