@@ -34,7 +34,8 @@ export const Dropdown = styled.div`
     border-radius: 13px;
     color: ${({ theme }) => theme.colors.dark};
     gap: 10px;
-    box-shadow: rgba(34, 34, 34, 0.24) 0px 3px 8px;
+    /* box-shadow: rgba(34, 34, 34, 0.24) 0px 3px 8px; */
+    box-shadow: 0 4px 16px 0 rgb(50 60 69 / 20%);
 `;
 
 export const ProfileSection = styled.div`

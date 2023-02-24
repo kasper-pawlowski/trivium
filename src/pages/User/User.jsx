@@ -57,7 +57,7 @@ const User = () => {
                 <Avatar src={data.photoURL} alt="" draggable={false} />
                 <DisplayName>{data.displayName}</DisplayName>
                 <Uid onClick={() => copyUidToClipboard(data)}>
-                    <p>#{user.uid}</p>
+                    <p>#{data.uid}</p>
                     <span>{copied ? <CopySuccess color="#6A5AE0" size="16" variant="Outline" /> : <Copy size="16" variant="Outline" />}</span>
                 </Uid>
             </InfoWrapper>

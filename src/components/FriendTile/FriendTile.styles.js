@@ -1,3 +1,4 @@
+import { Trash } from 'iconsax-react';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -33,4 +34,9 @@ export const DisplayName = styled.p`
     &:hover {
         text-decoration: underline;
     }
+`;
+
+export const TrashIcon = styled(Trash)`
+    margin-left: auto;
+    cursor: pointer;
 `;
