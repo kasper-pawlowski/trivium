@@ -27,7 +27,7 @@ const TabBar = () => {
             </StyledLink>
             <StyledLink to="/notifications">
                 <Notification size="20" color="#fff" variant={pathname === '/notifications' ? 'Bold' : 'Outline'} />
-                {notifications.length && <NotificationsNumber>{notifications.length}</NotificationsNumber>}
+                {notifications.length > 0 && <NotificationsNumber>{notifications.length}</NotificationsNumber>}
             </StyledLink>
             <StyledLink to={`/user/${uid}`}>
                 <Avatar src={photoURL} alt="" draggable={false} />
