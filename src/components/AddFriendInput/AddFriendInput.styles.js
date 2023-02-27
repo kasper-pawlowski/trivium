@@ -5,6 +5,9 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 export const InputWrapper = styled.div`
@@ -24,6 +27,9 @@ export const InputWrapper = styled.div`
     &:hover,
     &:focus-within {
         border-color: ${({ theme }) => theme.colors.primary};
+    }
+    @media screen and (max-width: 768px) {
+        width: 100%;
     }
 `;
 
@@ -46,6 +52,10 @@ export const Input = styled.input`
     }
     &[type='number'] {
         -moz-appearance: textfield;
+    }
+
+    @media screen and (max-width: 768px) {
+        flex: 1;
     }
 `;
 

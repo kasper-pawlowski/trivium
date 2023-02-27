@@ -17,6 +17,22 @@ export const StyledLink = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+`;
+
+export const NotificationsNumber = styled.div`
+    position: absolute;
+    top: 10px;
+    right: 26px;
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    font-weight: 300;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.colors.pink};
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const Avatar = styled.img`

@@ -7,43 +7,63 @@ import { Route, Routes } from 'react-router-dom';
 import Login from '@pages/Login/Login';
 import { useUserAuth } from '@contexts/AuthContext';
 import Loader from '@components/Loader/Loader';
-import { auth } from '@services/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '@services/firebase';
 import { BottomLabel, Layout, LayoutContent, LeftCorner, RightCorner } from '@components/Layout';
 import Home from '@pages/Home/Home';
 import TabBar from '@components/TabBar/TabBar';
 import { useMediaQuery } from 'react-responsive';
 import Category from '@pages/Category/Category';
-import { GameContextProvider } from '@contexts/GameContext';
 import Friends from '@pages/Friends/Friends';
 import User from '@pages/User/User';
+import Notifications from '@pages/Notifications/Notifications';
+import { useGameCtx } from '@contexts/GameContext';
 
 const AuthenticatedApp = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const [searchValue, setSearchValue] = useState('');
+    const { user } = useUserAuth();
+    const { notifications, setNotifications } = useGameCtx();
+
+    useEffect(() => {
+        const q = query(collection(db, 'invitations'), where('receiver.uid', '==', user.uid));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const newFriends = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setNotifications(newFriends);
+        });
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
+    // useEffect(() => {
+    //     console.log(notifications);
+    // }, [notifications]);
 
     return (
         <Layout>
-            <GameContextProvider>
-                <Navbar searchValue={searchValue} setSearchValue={setSearchValue} />
-                <LayoutContent>
-                    <Routes>
-                        <Route path="/" element={<Home searchValue={searchValue} />} />
-                        <Route path="/category" element={<Category />} />
-                        <Route path="/friends" element={<Friends />} />
-                        <Route path="/user/:uid" element={<User />} />
-                    </Routes>
-                </LayoutContent>
-                {isMobile ? (
-                    <TabBar />
-                ) : (
-                    <>
-                        <BottomLabel />
-                        <LeftCorner />
-                        <RightCorner />
-                    </>
-                )}
-            </GameContextProvider>
+            <Navbar searchValue={searchValue} setSearchValue={setSearchValue} />
+            <LayoutContent>
+                <Routes>
+                    <Route path="/" element={<Home searchValue={searchValue} />} />
+                    <Route path="/category" element={<Category />} />
+                    <Route path="/friends" element={<Friends />} />
+                    <Route path="/notifications" element={<Notifications />} />
+                    <Route path="/user/:uid" element={<User />} />
+                </Routes>
+            </LayoutContent>
+            {isMobile ? (
+                <TabBar />
+            ) : (
+                <>
+                    <BottomLabel />
+                    <LeftCorner />
+                    <RightCorner />
+                </>
+            )}
         </Layout>
     );
 };

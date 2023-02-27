@@ -2,7 +2,7 @@ import FriendTile from '@components/FriendTile/FriendTile';
 import Loader from '@components/Loader/Loader';
 import { useUserAuth } from '@contexts/AuthContext';
 import { db } from '@services/firebase';
-import { collection, query, where, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, query, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { Grid, Title, Wrapper } from './FriendsList.styles';
 

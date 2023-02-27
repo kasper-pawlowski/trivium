@@ -1,8 +1,9 @@
-import React from 'react';
-import { Avatar, LeftCorner, RightCorner, StyledLink, Wrapper } from './TabBar.styles.js';
+import React, { useEffect } from 'react';
+import { Avatar, LeftCorner, NotificationsNumber, RightCorner, StyledLink, Wrapper } from './TabBar.styles.js';
 import { useUserAuth } from '@contexts/AuthContext';
 import { Home2, Notification, Profile2User } from 'iconsax-react';
 import { useLocation } from 'react-router-dom';
+import { useGameCtx } from '@contexts/GameContext.jsx';
 
 const TabBar = () => {
     const location = useLocation();
@@ -10,6 +11,11 @@ const TabBar = () => {
     const {
         user: { photoURL, uid },
     } = useUserAuth();
+    const { notifications } = useGameCtx();
+
+    useEffect(() => {
+        console.log(notifications.length);
+    }, [notifications]);
 
     return (
         <Wrapper>
@@ -21,6 +27,7 @@ const TabBar = () => {
             </StyledLink>
             <StyledLink to="/notifications">
                 <Notification size="20" color="#fff" variant={pathname === '/notifications' ? 'Bold' : 'Outline'} />
+                {notifications.length && <NotificationsNumber>{notifications.length}</NotificationsNumber>}
             </StyledLink>
             <StyledLink to={`/user/${uid}`}>
                 <Avatar src={photoURL} alt="" draggable={false} />
