@@ -22,11 +22,12 @@ export const StyledLink = styled(Link)`
 
 export const NotificationsNumber = styled.div`
     position: absolute;
-    top: 10px;
-    right: 26px;
+    top: 50%;
+    right: 50%;
+    translate: 100% -120%;
     width: 16px;
     height: 16px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 300;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.pink};
