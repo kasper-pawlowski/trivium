@@ -62,6 +62,11 @@ export const Button = styled.button`
     font-size: 14px;
     font-weight: 400;
     width: 160px;
+    transition-duration: 0.2s;
+
+    &:active {
+        transform: translateY(1px);
+    }
 
     &:disabled {
         background-color: ${({ theme }) => theme.colors.lightPrimary};

@@ -12,18 +12,12 @@ const FriendsList = () => {
     const { user } = useUserAuth();
 
     useEffect(() => {
-        const q = query(collection(db, 'users', user.googleUid, 'friends'), where('status', '==', 'accepted'));
+        const q = query(collection(db, 'users', user.googleUid, 'friends'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const newFriends = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
-            // querySnapshot.docs.map((doc) =>
-            //     console.log({
-            //         id: doc.id,
-            //         ...doc.data(),
-            //     })
-            // );
             setFriends(newFriends);
             isLoading(false);
         });
