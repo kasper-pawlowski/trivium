@@ -1,6 +1,6 @@
 import { useUserAuth } from '@contexts/AuthContext';
 import { db } from '@services/firebase';
-import { collection, doc, getDocs, query, setDoc, Timestamp, where } from 'firebase/firestore';
+import { collection, doc, getDocs, query, setDoc, serverTimestamp, where } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { Button, Input, InputWrapper, Wrapper } from './AddFriendInput.styles';
 
@@ -52,7 +52,7 @@ const AddFriendInput = () => {
                 uid: searchedUser.uid,
             },
             inviteStatus: 'pending',
-            timestamp: Timestamp.now(),
+            timestamp: serverTimestamp(),
         });
     };
 

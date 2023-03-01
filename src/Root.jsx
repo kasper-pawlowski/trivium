@@ -7,7 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from '@pages/Login/Login';
 import { useUserAuth } from '@contexts/AuthContext';
 import Loader from '@components/Loader/Loader';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore';
 import { db } from '@services/firebase';
 import { BottomLabel, Layout, LayoutContent, LeftCorner, RightCorner } from '@components/Layout';
 import Home from '@pages/Home/Home';
@@ -23,25 +23,22 @@ const AuthenticatedApp = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const [searchValue, setSearchValue] = useState('');
     const { user } = useUserAuth();
-    const { notifications, setNotifications } = useGameCtx();
+    const { setNotifications, setHasUnreadNotifications } = useGameCtx();
 
     useEffect(() => {
-        const q = query(collection(db, 'invitations'), where('receiver.uid', '==', user.uid));
+        const q = query(collection(db, 'invitations'), where('receiver.uid', '==', user.uid), orderBy('timestamp', 'desc'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const newFriends = querySnapshot.docs.map((doc) => ({
+            const notificationsArray = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
-            setNotifications(newFriends);
+            setNotifications(notificationsArray);
+            notificationsArray.length > 0 && setHasUnreadNotifications(true);
         });
         return () => {
             unsubscribe();
         };
     }, []);
-
-    // useEffect(() => {
-    //     console.log(notifications);
-    // }, [notifications]);
 
     return (
         <Layout>

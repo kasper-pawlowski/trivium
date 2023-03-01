@@ -11,11 +11,7 @@ const TabBar = () => {
     const {
         user: { photoURL, uid },
     } = useUserAuth();
-    const { notifications } = useGameCtx();
-
-    useEffect(() => {
-        console.log(notifications.length);
-    }, [notifications]);
+    const { notifications, hasUnreadNotifications } = useGameCtx();
 
     return (
         <Wrapper>
@@ -27,7 +23,7 @@ const TabBar = () => {
             </StyledLink>
             <StyledLink to="/notifications">
                 <Notification size="20" color="#fff" variant={pathname === '/notifications' ? 'Bold' : 'Outline'} />
-                {notifications.length > 0 && <NotificationsNumber>{notifications.length}</NotificationsNumber>}
+                {hasUnreadNotifications && notifications.length > 0 && <NotificationsNumber>{notifications.length}</NotificationsNumber>}
             </StyledLink>
             <StyledLink to={`/user/${uid}`}>
                 <Avatar src={photoURL} alt="" draggable={false} />

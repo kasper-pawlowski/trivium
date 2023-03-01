@@ -25,6 +25,7 @@ const User = () => {
             const q = query(collection(db, 'users'), where('uid', '==', uid));
             const getUser = async () => {
                 const querySnapshot = await getDocs(q);
+                console.log(querySnapshot);
                 if (!querySnapshot.empty) {
                     setData(querySnapshot.docs[0].data());
                     isLoading(false);

@@ -14,6 +14,7 @@ const StyledButton = styled.button`
     transition-duration: 0.2s;
     ${({ theme, variant }) => variant === 'primary' && `background-color: ${theme.colors.primary}; color: ${theme.colors.white};`};
     ${({ theme, variant }) => variant === 'secondary' && `background-color: ${theme.colors.white};`};
+    ${({ theme, variant }) => variant === 'third' && ` color: ${theme.colors.pink}; background-color: ${theme.colors.lightPink};`};
 
     &:active {
         transform: translateY(2px);

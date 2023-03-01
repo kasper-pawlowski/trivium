@@ -7,6 +7,7 @@ const initialState = {};
 export function GameContextProvider({ children }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [notifications, setNotifications] = useState([]);
+    const [hasUnreadNotifications, setHasUnreadNotifications] = useState(null);
 
     return (
         <gameContext.Provider
@@ -15,6 +16,8 @@ export function GameContextProvider({ children }) {
                 setSelectedCategory,
                 notifications,
                 setNotifications,
+                hasUnreadNotifications,
+                setHasUnreadNotifications,
             }}>
             {children}
         </gameContext.Provider>

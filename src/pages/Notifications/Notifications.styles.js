@@ -7,3 +7,9 @@ export const Wrapper = styled.div`
     align-items: center;
     gap: 50px;
 `;
+
+export const Title = styled.p`
+    color: ${({ theme }) => theme.colors.dark};
+    font-size: 18px;
+    font-weight: 500;
+`;
