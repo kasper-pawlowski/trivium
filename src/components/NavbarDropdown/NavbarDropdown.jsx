@@ -9,31 +9,39 @@ import { Avatar, Dropdown, Name, Option, ProfileSection, StyledArrowDown2, Uid, 
 
 const NavbarDropdown = () => {
     const { copyUidToClipboard, copied } = useCopyUidToClipboard();
-    const [open, setOpen] = useState(false);
-    const drop = useRef(null);
+    const { ref, isComponentVisible, setIsComponentVisible } = useOnClickOutside(false);
     const uidRef = useRef(null);
     const { logOut, user } = useUserAuth();
     const navigate = useNavigate();
 
-    useOnClickOutside(drop, () => setOpen(false));
-
     return (
         <Wrapper>
             <div className="drop">
-                <StyledArrowDown2 onClick={() => setOpen(true)} open={open} size="20" variant="Bold" />
+                <StyledArrowDown2
+                    onClick={() => setIsComponentVisible(true)}
+                    {...(isComponentVisible && { iscomponentvisible: isComponentVisible.toString() })}
+                    size="20"
+                    variant="Bold"
+                />
             </div>
             <AnimatePresence>
-                {open && (
+                {isComponentVisible && (
                     <Dropdown
-                        ref={drop}
+                        ref={ref}
                         as={motion.div}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.1 }}>
+                        initial={{ opacity: 0, scale: 0.6, y: -50, x: 50 }}
+                        animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+                        exit={{ opacity: 0, scale: 0.6, y: -50, x: 50 }}
+                        transformOrigin="top right"
+                        transition={{ duration: 0.2 }}>
                         <ProfileSection>
-                            <Avatar onClick={() => (navigate(`/user/${user.uid}`), setOpen(false))} src={user.photoURL} alt="" draggable={false} />
-                            <Name onClick={() => (navigate(`/user/${user.uid}`), setOpen(false))}>{user.displayName}</Name>
+                            <Avatar
+                                onClick={() => (navigate(`/user/${user.uid}`), setIsComponentVisible(false))}
+                                src={user.photoURL}
+                                alt=""
+                                draggable={false}
+                            />
+                            <Name onClick={() => (navigate(`/user/${user.uid}`), setIsComponentVisible(false))}>{user.displayName}</Name>
                             <Uid onClick={() => copyUidToClipboard(user)} ref={uidRef}>
                                 <p>#{user.uid}</p>
                                 <span>
@@ -41,11 +49,11 @@ const NavbarDropdown = () => {
                                 </span>
                             </Uid>
                         </ProfileSection>
-                        <Option onClick={() => (navigate('/friends'), setOpen(false))}>
+                        <Option onClick={() => (navigate('/friends'), setIsComponentVisible(false))}>
                             <Profile2User size="15" color="#001833" variant="Outline" />
                             <p>Friends</p>
                         </Option>
-                        <Option onClick={() => (logOut(), setOpen(false), navigate('/'))}>
+                        <Option onClick={() => (logOut(), setIsComponentVisible(false), navigate('/'))}>
                             <LogoutCurve size="15" color="#001833" variant="Outline" />
                             <p>Log out</p>
                         </Option>

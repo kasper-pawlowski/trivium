@@ -1,12 +1,13 @@
 import { useUserAuth } from '@contexts/AuthContext';
 import { db } from '@services/firebase';
 import { collection, doc, getDocs, query, setDoc, serverTimestamp, where } from 'firebase/firestore';
+import { InfoCircle } from 'iconsax-react';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Button, Input, InputWrapper, Wrapper } from './AddFriendInput.styles';
 
 const AddFriendInput = () => {
     const [inputValue, setInputValue] = useState('');
-    const [error, setError] = useState(null);
     const { user } = useUserAuth();
 
     const handleInputChange = (e) => {
@@ -45,11 +46,13 @@ const AddFriendInput = () => {
                 displayName: user.displayName,
                 photoURL: user.photoURL,
                 uid: user.uid,
+                googleUid: user.googleUid,
             },
             receiver: {
                 displayName: searchedUser.displayName,
                 photoURL: searchedUser.photoURL,
                 uid: searchedUser.uid,
+                googleUid: searchedUser.googleUid,
             },
             inviteStatus: 'pending',
             timestamp: serverTimestamp(),
@@ -59,29 +62,55 @@ const AddFriendInput = () => {
     const handleFriendRequest = async () => {
         const searchedUser = await searchUser(inputValue);
         if (!searchedUser) {
-            setError('No user found with this uid');
-            console.log('No user found with this uid');
+            toast('No user found with this uid', {
+                icon: <InfoCircle />,
+                style: {
+                    border: '1px solid #EF8136',
+                    padding: '16px',
+                    backgroundColor: '#FEF7EC',
+                    color: '#EF8136',
+                },
+            });
             return;
         }
 
         const alreadyFriends = await checkFriendship(user, searchedUser);
         if (alreadyFriends) {
-            setError('This user is already your friend');
-            console.log('This user is already your friend');
+            toast.success('This user is already your friend', {
+                style: {
+                    border: '1px solid #62D346',
+                    padding: '16px',
+                    backgroundColor: '#F4FFFF',
+                    color: '#62D346',
+                },
+            });
             return;
         }
 
         const invitationExists = await checkIfInvitationExists(user, searchedUser);
         if (invitationExists) {
-            setError('invitationExists');
-            console.log('invitationExists');
+            toast('Invitation has already been sent', {
+                icon: <InfoCircle />,
+                style: {
+                    border: '1px solid #EF8136',
+                    padding: '16px',
+                    backgroundColor: '#FEF7EC',
+                    color: '#EF8136',
+                },
+            });
             return;
         }
 
         await sendFriendRequest(user, searchedUser);
         setInputValue('');
-        setError(null);
-        console.log('Invitation Sended');
+        toast.success('Invitation Sended!', {
+            style: {
+                border: '1px solid #62D346',
+                padding: '16px',
+                backgroundColor: '#F4FFFF',
+                color: '#62D346',
+            },
+        });
     };
 
     return (
@@ -93,7 +122,6 @@ const AddFriendInput = () => {
                     Sent friend request
                 </Button>
             </InputWrapper>
-            {error && <p>{error}</p>}
         </Wrapper>
     );
 };

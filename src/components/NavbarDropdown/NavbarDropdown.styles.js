@@ -18,24 +18,40 @@ export const Wrapper = styled.div`
 export const StyledArrowDown2 = styled(ArrowDown2)`
     color: ${({ theme }) => theme.colors.lightPurple};
     transition-duration: 0.2s;
-    scale: ${({ open }) => (open ? '1 -1' : '-1 1')};
+    scale: ${({ iscomponentvisible }) => (iscomponentvisible ? '1 -1' : '-1 1')};
     cursor: pointer;
 `;
 
 export const Dropdown = styled.div`
-    position: fixed;
+    position: absolute;
     background-color: ${({ theme }) => theme.colors.white};
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    right: 14px;
-    top: 56px;
+    padding-bottom: 6px;
+    right: -6px;
+    top: 60px;
     border-radius: 13px;
     color: ${({ theme }) => theme.colors.dark};
-    gap: 10px;
-    /* box-shadow: rgba(34, 34, 34, 0.24) 0px 3px 8px; */
-    box-shadow: 0 4px 16px 0 rgb(50 60 69 / 20%);
+    gap: 6px;
+    min-width: 240px;
+    box-shadow: 0 4px 16px 0 ${({ theme }) => theme.colors.lightPrimary};
+    z-index: 999;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: -6px;
+        right: 6px;
+        border-radius: 5px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid ${({ theme }) => theme.colors.white};
+        border-right: 10px solid transparent;
+        border-bottom: 0 solid transparent;
+        border-left: 10px solid transparent;
+        transform: rotate(180deg);
+    }
 `;
 
 export const ProfileSection = styled.div`
@@ -108,7 +124,7 @@ export const Option = styled.button`
         background-color: ${({ theme }) => theme.colors.lightPurple2};
     }
     &:last-child {
-        border-bottom-left-radius: 13px;
-        border-bottom-right-radius: 13px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
     }
 `;

@@ -9,6 +9,10 @@ export const Wrapper = styled.div`
     border: 2px solid ${({ theme }) => theme.colors.lightPurple};
     background-color: ${({ theme }) => theme.colors.white};
     gap: 20px;
+
+    @media screen and (min-width: 768px) {
+        padding: 14px;
+    }
 `;
 
 export const LeftContainer = styled.div``;
@@ -16,15 +20,18 @@ export const LeftContainer = styled.div``;
 export const Avatar = styled.img`
     border-radius: 50%;
     width: 40px;
+    cursor: pointer;
 `;
 
 export const RightContainer = styled.div`
+    flex: 1;
     display: flex;
     flex-direction: column;
 `;
 
 export const Message = styled.p`
-    a {
+    span {
+        cursor: pointer;
         font-weight: 500;
 
         &:hover {
@@ -44,6 +51,11 @@ export const ButtonsContainer = styled.div`
     display: flex;
     gap: 10px;
     margin-top: 16px;
+    align-self: flex-end;
+
+    @media screen and (min-width: 768px) {
+        margin-top: 12px;
+    }
 `;
 
 export const Button = styled(StyledButton)`
@@ -51,4 +63,8 @@ export const Button = styled(StyledButton)`
     font-weight: 500;
     font-size: 14px;
     flex: 1;
+
+    @media screen and (min-width: 768px) {
+        padding: 9px 16px;
+    }
 `;

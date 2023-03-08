@@ -20,7 +20,8 @@ const FriendTile = ({ friend }) => {
     };
 
     const handleDeleteUserFromFriendsList = async () => {
-        await deleteDoc(doc(db, 'users', user.googleUid, 'friends', friend.id));
+        await deleteDoc(doc(db, 'users', user.googleUid, 'friends', `${user.uid}${friend.uid}`));
+        await deleteDoc(doc(db, 'users', friend.googleUid, 'friends', `${friend.uid}${user.uid}`));
     };
 
     return (

@@ -11,6 +11,8 @@ const FriendsList = () => {
     const [friends, setFriends] = useState([]);
     const { user } = useUserAuth();
 
+    console.log(friends);
+
     useEffect(() => {
         const q = query(collection(db, 'users', user.googleUid, 'friends'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {

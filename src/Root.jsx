@@ -18,6 +18,7 @@ import Friends from '@pages/Friends/Friends';
 import User from '@pages/User/User';
 import Notifications from '@pages/Notifications/Notifications';
 import { useGameCtx } from '@contexts/GameContext';
+import { Toaster } from 'react-hot-toast';
 
 const AuthenticatedApp = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -61,6 +62,7 @@ const AuthenticatedApp = () => {
                     <RightCorner />
                 </>
             )}
+            <Toaster />
         </Layout>
     );
 };

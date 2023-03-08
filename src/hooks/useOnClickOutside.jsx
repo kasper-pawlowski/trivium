@@ -1,20 +1,23 @@
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-const useOnClickOutside = (ref, handler) => {
+const useOnClickOutside = (initialIsVisible) => {
+    const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
+    const ref = useRef(null);
+
+    const handleClickOutside = (event) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+            setIsComponentVisible(false);
+        }
+    };
+
     useEffect(() => {
-        const listener = (event) => {
-            if (!ref.current || ref.current.contains(event.target)) {
-                return;
-            }
-            handler(event);
-        };
-        document.addEventListener('mousedown', listener);
-        document.addEventListener('touchstart', listener);
+        document.addEventListener('click', handleClickOutside, true);
         return () => {
-            document.removeEventListener('mousedown', listener);
-            document.removeEventListener('touchstart', listener);
+            document.removeEventListener('click', handleClickOutside, true);
         };
-    }, [ref, handler]);
+    }, []);
+
+    return { ref, isComponentVisible, setIsComponentVisible };
 };
 
 export default useOnClickOutside;

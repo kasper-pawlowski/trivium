@@ -25,7 +25,6 @@ const User = () => {
             const q = query(collection(db, 'users'), where('uid', '==', uid));
             const getUser = async () => {
                 const querySnapshot = await getDocs(q);
-                console.log(querySnapshot);
                 if (!querySnapshot.empty) {
                     setData(querySnapshot.docs[0].data());
                     isLoading(false);
@@ -37,14 +36,6 @@ const User = () => {
             getUser();
         }
     }, [user, uid]);
-
-    // const addUserToFriends = async () => {
-    //     const docRef = await addDoc(collection(db, 'users', 'wyafRsFpDZZjfV5eZJ14YStDa1L2', 'friends'), {
-    //         ...data,
-    //         status: 'accepted',
-    //     });
-    //     console.log('Document written with ID: ', docRef.id);
-    // };
 
     if (loading)
         return (
@@ -62,7 +53,6 @@ const User = () => {
                     <span>{copied ? <CopySuccess color="#6A5AE0" size="16" variant="Outline" /> : <Copy size="16" variant="Outline" />}</span>
                 </Uid>
             </InfoWrapper>
-            {/* <button onClick={addUserToFriends}>asdasdasasdasd</button> */}
             {user.uid == uid && (
                 <StyledButton onClick={() => navigate(`/friends`)} variant="primary">
                     Friends

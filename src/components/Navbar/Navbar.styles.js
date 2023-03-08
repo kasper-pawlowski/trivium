@@ -16,6 +16,13 @@ export const Wrapper = styled.div`
     }
 `;
 
+export const Seperator = styled.div`
+    width: 1px;
+    height: 60%;
+    border-radius: 100vw;
+    background-color: ${({ theme }) => theme.colors.lightPrimary};
+`;
+
 export const StyledLink = styled(Link)`
     flex: 1;
     height: 100%;
