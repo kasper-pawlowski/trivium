@@ -3,7 +3,7 @@ import Loader from '@components/Loader/Loader';
 import useCopyUidToClipboard from '@hooks/useCopyUidToClipboard';
 import { useUserAuth } from '@contexts/AuthContext';
 import { db } from '@services/firebase';
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { Copy, CopySuccess } from 'iconsax-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Avatar, DisplayName, InfoWrapper, Uid, Wrapper } from './User.styles';

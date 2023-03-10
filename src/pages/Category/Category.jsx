@@ -3,11 +3,12 @@ import { useGameCtx } from '@contexts/GameContext';
 import formatCategoryName from '@helpers/formatCategoryName';
 import getCategoryIcon from '@helpers/getCategoryIcon';
 import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { CategoryInfoWrapper, CategoryName, Icon, IconWrapper, Wrapper } from './Category.styles';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { CategoryInfoWrapper, CategoryName, Icon, IconWrapper, Seperator, Wrapper } from './Category.styles';
 
 const Category = () => {
     const { selectedCategory } = useGameCtx();
+    const navigate = useNavigate();
 
     if (!selectedCategory) return <Navigate to="/" replace={true} />;
     return (
@@ -18,7 +19,11 @@ const Category = () => {
                 </IconWrapper>
                 <CategoryName>{formatCategoryName(selectedCategory.name)}</CategoryName>
             </CategoryInfoWrapper>
-            {/* <StyledButton variant="primary">Play</StyledButton> */}
+            <StyledButton variant="primary" onClick={() => navigate('/game')}>
+                Play solo
+            </StyledButton>
+            <Seperator>Or</Seperator>
+            <StyledButton variant="primary">Challenge a friend</StyledButton>
         </Wrapper>
     );
 };
