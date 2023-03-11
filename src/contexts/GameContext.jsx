@@ -8,6 +8,8 @@ export function GameContextProvider({ children }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [notifications, setNotifications] = useState([]);
     const [hasUnreadNotifications, setHasUnreadNotifications] = useState(null);
+    const [currentRound, setCurrentRound] = useState(null);
+    const [quizData, setQuizData] = useState(null);
 
     return (
         <gameContext.Provider
@@ -18,6 +20,10 @@ export function GameContextProvider({ children }) {
                 setNotifications,
                 hasUnreadNotifications,
                 setHasUnreadNotifications,
+                currentRound,
+                setCurrentRound,
+                quizData,
+                setQuizData,
             }}>
             {children}
         </gameContext.Provider>

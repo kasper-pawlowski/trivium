@@ -7,9 +7,13 @@ import noFound from '@assets/illustrations/noFound.svg';
 import fetcher from '@helpers/fetcher';
 
 const CategoryList = ({ searchValue }) => {
-    const { data, error, isLoading } = useSWR('https://opentdb.com/api_category.php', fetcher);
+    const { data, isError, isLoading } = useSWR('https://opentdb.com/api_category.php', fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    });
 
-    if (error) return <div>failed to load</div>;
+    if (isError) return <div>failed to load</div>;
     if (isLoading) return <Loader variant="primary" />;
 
     const searchCategories = (searchValue) => {

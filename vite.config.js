@@ -18,6 +18,7 @@ export default defineConfig({
             { find: '@services', replacement: path.resolve(__dirname, 'src/services') },
             { find: '@helpers', replacement: path.resolve(__dirname, 'src/helpers') },
             { find: '@hooks', replacement: path.resolve(__dirname, 'src/hooks') },
+            { find: '@lib', replacement: path.resolve(__dirname, 'src/lib') },
         ],
     },
     optimizeDeps: {
