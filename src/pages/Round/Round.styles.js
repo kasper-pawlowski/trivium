@@ -5,7 +5,13 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+`;
+
+export const QuestionCountInfo = styled.p`
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.dark};
+    margin-bottom: 1rem;
+    align-self: flex-start;
 `;
 
 export const Question = styled.p`
@@ -13,6 +19,7 @@ export const Question = styled.p`
     text-align: center;
     font-weight: 700;
     color: ${({ theme }) => theme.colors.dark};
+    margin-bottom: 2rem;
 `;
 
 export const AnswersWrapper = styled.div`
@@ -27,6 +34,20 @@ export const AnswersWrapper = styled.div`
     }
 `;
 
+const borderStyle = ({ theme, isCorrect, clicked, answer, selectedAnswer, timeUp }) => {
+    if (clicked) {
+        if (isCorrect) {
+            return `border-color: ${theme.colors.green}; background-color: ${theme.colors.lightGreen}`;
+        } else if (selectedAnswer === answer) {
+            return `border-color: ${theme.colors.pink}; background-color: ${theme.colors.lightPink}`;
+        }
+    }
+    if (timeUp && isCorrect) {
+        return `border-color: ${theme.colors.green}; background-color: ${theme.colors.lightGreen}`;
+    }
+    return null;
+};
+
 export const Answer = styled.button`
     background: none;
     border: none;
@@ -36,8 +57,8 @@ export const Answer = styled.button`
     font-weight: 500;
     font-size: 18px;
     transition-duration: 0.2s;
-
+    ${borderStyle};
     &:hover {
-        border: 2px solid ${({ theme }) => theme.colors.gray};
+        border-color: ${({ theme, clicked }) => !clicked && theme.colors.gray};
     }
 `;

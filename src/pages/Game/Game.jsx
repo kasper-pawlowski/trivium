@@ -8,14 +8,15 @@ import { useNavigate } from 'react-router-dom';
 import Round from '@pages/Round/Round';
 import RoundInfo from '@pages/RoundInfo/RoundInfo';
 import shuffleArray from '@helpers/shuffleArray';
+import GameSummary from '@pages/GameSummary/GameSummary';
 
 const Game = () => {
     const navigate = useNavigate();
-    const { selectedCategory, setCurrentRound, currentRound, quizData, setQuizData } = useGameCtx();
+    const { selectedCategory, setCurrentRound, setQuizData, userAnswers, points } = useGameCtx();
     const [view, setView] = useState('info');
 
     const { data, error, isLoading } = useSWR(
-        `https://opentdb.com/api.php?amount=5&category=${selectedCategory?.id}&difficulty=medium&type=multiple`,
+        `https://opentdb.com/api.php?amount=5&category=${selectedCategory?.id}&difficulty=easy&type=multiple`,
         fetcher,
         {
             revalidateIfStale: false,
@@ -23,6 +24,11 @@ const Game = () => {
             revalidateOnReconnect: false,
         }
     );
+
+    useEffect(() => {
+        console.log('userAnswers:', userAnswers);
+        console.log('points:', points);
+    }, [userAnswers, points]);
 
     useEffect(() => {
         if (!selectedCategory) {
@@ -41,7 +47,6 @@ const Game = () => {
     };
 
     useEffect(() => {
-        console.log(data?.results);
         if (data?.results) {
             const quizData = data.results.map((result) => {
                 const answers = mergeAnswers(result.correct_answer, result.incorrect_answers);
@@ -58,10 +63,6 @@ const Game = () => {
         setCurrentRound(1);
     }, [data]);
 
-    useEffect(() => {
-        console.log(quizData);
-    }, [quizData]);
-
     if (error) return <div>failed to load</div>;
     if (isLoading)
         return (
@@ -73,6 +74,7 @@ const Game = () => {
         <Wrapper>
             {view === 'info' && <RoundInfo setView={setView} />}
             {view === 'round' && <Round setView={setView} />}
+            {view === 'summary' && <GameSummary setView={setView} />}
         </Wrapper>
     );
 };

@@ -2,8 +2,16 @@ import React from 'react';
 import { AppInfo, Logo, Seperator, TriviumDescription, TriviumTitle, Wrapper } from './Home.styles';
 import CategoryList from '@components/CategoryList/CategoryList';
 import logo from '@assets/triviumLogo.svg';
+import { useEffect } from 'react';
+import { useGameCtx } from '@contexts/GameContext';
 
 const Home = ({ searchValue }) => {
+    const { resetQuizData } = useGameCtx();
+
+    useEffect(() => {
+        resetQuizData();
+    }, []);
+
     return (
         <Wrapper>
             <AppInfo>
