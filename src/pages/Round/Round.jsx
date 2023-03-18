@@ -37,7 +37,7 @@ const Round = ({ setView }) => {
 
     return (
         <Wrapper as={motion.div} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} tranform={{ duration: 0.6 }}>
-            <Timer duration={999} isTimeUp={isTimeUp} handleNextRound={handleNextRound} clicked={clicked} />
+            <Timer duration={15} isTimeUp={isTimeUp} handleNextRound={handleNextRound} clicked={clicked} />
             <Question>{decode(quizData[currentRound - 1].question)}</Question>
             <AnswersWrapper>
                 {quizData[currentRound - 1].answers.map((answer) => (
