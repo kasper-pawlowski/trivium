@@ -22,7 +22,7 @@ const Game = () => {
     }, []);
 
     const { data, error, isLoading } = useSWR(
-        `https://opentdb.com/api.php?amount=2&category=${selectedCategory?.id}&difficulty=easy&type=multiple`,
+        `https://opentdb.com/api.php?amount=5&category=${selectedCategory?.id}&difficulty=easy&type=multiple`,
         fetcher,
         {
             revalidateIfStale: false,
