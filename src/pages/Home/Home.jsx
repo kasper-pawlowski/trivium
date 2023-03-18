@@ -6,10 +6,10 @@ import { useEffect } from 'react';
 import { useGameCtx } from '@contexts/GameContext';
 
 const Home = ({ searchValue }) => {
-    const { resetQuizData } = useGameCtx();
+    const { setSelectedCategory } = useGameCtx();
 
     useEffect(() => {
-        resetQuizData();
+        setSelectedCategory();
     }, []);
 
     return (

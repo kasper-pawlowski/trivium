@@ -1,6 +1,6 @@
 import { useGameCtx } from '@contexts/GameContext';
 import React, { useEffect, useState } from 'react';
-import { Answer, AnswersWrapper, Question, QuestionCountInfo, Wrapper } from './Round.styles';
+import { Answer, AnswersWrapper, Question, Wrapper } from './Round.styles';
 import { decode } from 'html-entities';
 import Timer from '@components/Timer/Timer';
 import { motion } from 'framer-motion';
@@ -37,10 +37,7 @@ const Round = ({ setView }) => {
 
     return (
         <Wrapper as={motion.div} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} tranform={{ duration: 0.6 }}>
-            <Timer duration={10} isTimeUp={isTimeUp} handleNextRound={handleNextRound} clicked={clicked} />
-            <QuestionCountInfo>
-                QUESTION {currentRound} of {quizData.length}
-            </QuestionCountInfo>
+            <Timer duration={999} isTimeUp={isTimeUp} handleNextRound={handleNextRound} clicked={clicked} />
             <Question>{decode(quizData[currentRound - 1].question)}</Question>
             <AnswersWrapper>
                 {quizData[currentRound - 1].answers.map((answer) => (

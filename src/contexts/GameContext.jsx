@@ -22,7 +22,6 @@ export function GameContextProvider({ children }) {
     const [userAnswers, setUserAnswers] = useState(initialState.userAnswers);
 
     const resetQuizData = () => {
-        setSelectedCategory(initialState.selectedCategory);
         setCurrentRound(initialState.currentRound);
         setQuizData(initialState.quizData);
         setPoints(initialState.points);

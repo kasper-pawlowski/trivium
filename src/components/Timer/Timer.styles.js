@@ -2,8 +2,8 @@ import styled, { css, keyframes } from 'styled-components';
 
 export const Wrapper = styled.div`
     position: relative;
-    width: 70px;
-    height: 70px;
+    width: 64px;
+    height: 64px;
 `;
 
 export const TimerBackground = styled.div`

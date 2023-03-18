@@ -15,9 +15,11 @@ const Timer = ({ duration, isTimeUp, handleNextRound, clicked }) => {
             }, 1000);
         } else {
             clearInterval(intervalId);
-            isTimeUp(true);
-            setUserAnswers((previusAnswers) => [...previusAnswers, 'incorrect']);
-            handleNextRound();
+            if (!clicked) {
+                isTimeUp(true);
+                setUserAnswers((previusAnswers) => [...previusAnswers, 'incorrect']);
+                handleNextRound();
+            }
         }
         return () => {
             clearInterval(intervalId);

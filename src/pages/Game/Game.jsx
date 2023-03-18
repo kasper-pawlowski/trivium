@@ -1,7 +1,7 @@
 import { useGameCtx } from '@contexts/GameContext';
 import fetcher from '@helpers/fetcher';
 import React, { useEffect, useState } from 'react';
-import { Wrapper } from './Game.styles';
+import { TopContainer, Wrapper } from './Game.styles';
 import useSWR from 'swr';
 import Loader from '@components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
@@ -9,11 +9,17 @@ import Round from '@pages/Round/Round';
 import RoundInfo from '@pages/RoundInfo/RoundInfo';
 import shuffleArray from '@helpers/shuffleArray';
 import GameSummary from '@pages/GameSummary/GameSummary';
+import { useUserAuth } from '@contexts/AuthContext';
+import UserQuizProgress from '@components/UserQuizProgress/UserQuizProgress';
 
 const Game = () => {
     const navigate = useNavigate();
-    const { selectedCategory, setCurrentRound, setQuizData, userAnswers, points } = useGameCtx();
+    const { selectedCategory, setCurrentRound, setQuizData, userAnswers, currentRound, quizData, resetQuizData } = useGameCtx();
     const [view, setView] = useState('info');
+
+    useEffect(() => {
+        resetQuizData();
+    }, []);
 
     const { data, error, isLoading } = useSWR(
         `https://opentdb.com/api.php?amount=5&category=${selectedCategory?.id}&difficulty=easy&type=multiple`,
@@ -24,11 +30,6 @@ const Game = () => {
             revalidateOnReconnect: false,
         }
     );
-
-    useEffect(() => {
-        console.log('userAnswers:', userAnswers);
-        console.log('points:', points);
-    }, [userAnswers, points]);
 
     useEffect(() => {
         if (!selectedCategory) {
@@ -72,6 +73,11 @@ const Game = () => {
         );
     return (
         <Wrapper>
+            {(view === 'info' || view === 'round') && (
+                <TopContainer>
+                    <UserQuizProgress />
+                </TopContainer>
+            )}
             {view === 'info' && <RoundInfo setView={setView} />}
             {view === 'round' && <Round setView={setView} />}
             {view === 'summary' && <GameSummary setView={setView} />}

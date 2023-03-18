@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 50px;
+    padding-top: 4rem;
 `;
 
 export const IconWrapper = styled.div`

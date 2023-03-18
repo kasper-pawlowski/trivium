@@ -7,19 +7,13 @@ export const Wrapper = styled.div`
     align-items: center;
 `;
 
-export const QuestionCountInfo = styled.p`
-    font-weight: 500;
-    color: ${({ theme }) => theme.colors.dark};
-    margin-bottom: 1rem;
-    align-self: flex-start;
-`;
-
 export const Question = styled.p`
     font-size: 30px;
     text-align: center;
     font-weight: 700;
     color: ${({ theme }) => theme.colors.dark};
-    margin-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
 `;
 
 export const AnswersWrapper = styled.div`
@@ -59,6 +53,6 @@ export const Answer = styled.button`
     transition-duration: 0.2s;
     ${borderStyle};
     &:hover {
-        border-color: ${({ theme, clicked }) => !clicked && theme.colors.gray};
+        border-color: ${({ theme, clicked, timeUp }) => !clicked && !timeUp && theme.colors.gray};
     }
 `;
