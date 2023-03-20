@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Loader from '@components/Loader/Loader';
-import useCopyUidToClipboard from '@hooks/useCopyUidToClipboard';
+import useCopyToClipboard from '@hooks/useCopyToClipboard';
 import { useUserAuth } from '@contexts/AuthContext';
 import { db } from '@services/firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
@@ -10,7 +10,7 @@ import { Avatar, DisplayName, InfoWrapper, Uid, Wrapper } from './User.styles';
 import StyledButton from '@components/StyledButton';
 
 const User = () => {
-    const { copyUidToClipboard, copied } = useCopyUidToClipboard();
+    const { copyUidToClipboard, copied } = useCopyToClipboard();
     const [data, setData] = useState(null);
     const [loading, isLoading] = useState(true);
     const { uid } = useParams();
@@ -48,7 +48,7 @@ const User = () => {
             <InfoWrapper>
                 <Avatar src={data.photoURL} alt="" draggable={false} />
                 <DisplayName>{data.displayName}</DisplayName>
-                <Uid onClick={() => copyUidToClipboard(data)}>
+                <Uid onClick={() => copyUidToClipboard(data.uid)}>
                     <p>#{data.uid}</p>
                     <span>{copied ? <CopySuccess color="#6A5AE0" size="16" variant="Outline" /> : <Copy size="16" variant="Outline" />}</span>
                 </Uid>

@@ -1,5 +1,5 @@
 import { useUserAuth } from '@contexts/AuthContext';
-import useCopyUidToClipboard from '@hooks/useCopyUidToClipboard';
+import useCopyToClipboard from '@hooks/useCopyToClipboard';
 import useOnClickOutside from '@hooks/useOnClickOutside';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Copy, CopySuccess, LogoutCurve, Profile2User } from 'iconsax-react';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { Avatar, Dropdown, Name, Option, ProfileSection, StyledArrowDown2, Uid, Wrapper } from './NavbarDropdown.styles';
 
 const NavbarDropdown = () => {
-    const { copyUidToClipboard, copied } = useCopyUidToClipboard();
+    const { copyUidToClipboard, copied } = useCopyToClipboard();
     const { ref, isComponentVisible, setIsComponentVisible } = useOnClickOutside(false);
     const uidRef = useRef(null);
     const { logOut, user } = useUserAuth();
@@ -42,7 +42,7 @@ const NavbarDropdown = () => {
                                 draggable={false}
                             />
                             <Name onClick={() => (navigate(`/user/${user.uid}`), setIsComponentVisible(false))}>{user.displayName}</Name>
-                            <Uid onClick={() => copyUidToClipboard(user)} ref={uidRef}>
+                            <Uid onClick={() => copyUidToClipboard(user.uid)} ref={uidRef}>
                                 <p>#{user.uid}</p>
                                 <span>
                                     {copied ? <CopySuccess color="#6A5AE0" size="16" variant="Outline" /> : <Copy size="16" variant="Outline" />}

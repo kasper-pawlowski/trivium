@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-const useCopyUidToClipboard = () => {
+const useCopyToClipboard = () => {
     const [copied, setCopied] = useState(false);
 
-    const copyUidToClipboard = (user) => {
-        navigator.clipboard.writeText(user.uid);
+    const copyUidToClipboard = (text) => {
+        navigator.clipboard.writeText(text);
         setCopied(true);
         setTimeout(function () {
             setCopied(false);
@@ -14,4 +14,4 @@ const useCopyUidToClipboard = () => {
     return { copyUidToClipboard, copied };
 };
 
-export default useCopyUidToClipboard;
+export default useCopyToClipboard;

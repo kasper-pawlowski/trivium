@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 `;
 
 export const Question = styled.p`
@@ -12,7 +13,7 @@ export const Question = styled.p`
     text-align: center;
     font-weight: 700;
     color: ${({ theme }) => theme.colors.dark};
-    margin-top: 2rem;
+    margin-top: 4rem;
     margin-bottom: 3rem;
 `;
 
@@ -46,7 +47,7 @@ export const Answer = styled.button`
     background: none;
     border: none;
     padding: 20px;
-    border-radius: 13px;
+    border-radius: 8px 13px;
     border: 2px solid ${({ theme }) => theme.colors.lightPurple};
     font-weight: 500;
     font-size: 18px;

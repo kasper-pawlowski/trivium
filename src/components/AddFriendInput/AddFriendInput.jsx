@@ -61,6 +61,20 @@ const AddFriendInput = () => {
 
     const handleFriendRequest = async () => {
         const searchedUser = await searchUser(inputValue);
+
+        if (user.uid === searchedUser.uid) {
+            toast('You cannot send a friend request to yourself', {
+                icon: <InfoCircle />,
+                style: {
+                    border: '1px solid #EF8136',
+                    padding: '16px',
+                    backgroundColor: '#FEF7EC',
+                    color: '#EF8136',
+                },
+            });
+            return;
+        }
+
         if (!searchedUser) {
             toast('No user found with this uid', {
                 icon: <InfoCircle />,

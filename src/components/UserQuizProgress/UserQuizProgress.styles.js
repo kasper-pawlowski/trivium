@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     display: flex;
     gap: 10px;
+    width: 40%;
 
     img {
         height: 36px;
