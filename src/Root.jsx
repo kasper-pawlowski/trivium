@@ -19,8 +19,9 @@ import User from '@pages/User/User';
 import Notifications from '@pages/Notifications/Notifications';
 import { useGameCtx } from '@contexts/GameContext';
 import { Toaster } from 'react-hot-toast';
-import Game from '@pages/Game/Game';
+import SoloGame from '@pages/SoloGame/SoloGame';
 import Lobby from '@pages/Category copy/Lobby';
+import MultiplayerGame from '@pages/MultiplayerGame/MultiplayerGame';
 
 const AuthenticatedApp = () => {
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -53,7 +54,8 @@ const AuthenticatedApp = () => {
                     <Route path="/friends" element={<Friends />} />
                     <Route path="/notifications" element={<Notifications />} />
                     <Route path="/user/:uid" element={<User />} />
-                    <Route path="/game" element={<Game />} />
+                    <Route path="/game" element={<SoloGame />} />
+                    <Route path="/game/:gameID" element={<MultiplayerGame />} />
                     <Route path="/lobby/:gameID" element={<Lobby />} />
                 </Routes>
             </LayoutContent>

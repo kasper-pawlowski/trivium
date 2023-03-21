@@ -1,7 +1,7 @@
 import { useGameCtx } from '@contexts/GameContext';
 import fetcher from '@helpers/fetcher';
 import React, { useEffect, useState } from 'react';
-import { TopContainer, Wrapper } from './Game.styles';
+import { TopContainer, Wrapper } from './SoloGame.styles';
 import useSWR from 'swr';
 import Loader from '@components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
@@ -9,10 +9,9 @@ import Round from '@pages/Round/Round';
 import RoundInfo from '@pages/RoundInfo/RoundInfo';
 import shuffleArray from '@helpers/shuffleArray';
 import GameSummary from '@pages/GameSummary/GameSummary';
-import { useUserAuth } from '@contexts/AuthContext';
 import UserQuizProgress from '@components/UserQuizProgress/UserQuizProgress';
 
-const Game = () => {
+const SoloGame = () => {
     const navigate = useNavigate();
     const { selectedCategory, setCurrentRound, setQuizData, userAnswers, currentRound, quizData, resetQuizData } = useGameCtx();
     const [view, setView] = useState('info');
@@ -85,4 +84,4 @@ const Game = () => {
     );
 };
 
-export default Game;
+export default SoloGame;

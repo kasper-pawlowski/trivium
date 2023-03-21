@@ -1,66 +1,27 @@
+import StyledButton from '@components/StyledButton';
 import styled from 'styled-components';
-import { QRCodeSVG } from 'qrcode.react';
 
 export const Wrapper = styled.div`
     width: 100%;
     display: flex;
-    justify-content: center;
-    gap: 50px;
-    padding-top: 10%;
-
-    @media screen and (max-width: 768px) {
-        flex-direction: column;
-        gap: 10px;
-        padding-top: 0;
-    }
-`;
-
-export const ContentWrapper = styled.div`
-    display: flex;
     flex-direction: column;
     align-items: center;
 
-    span {
-        margin-bottom: 50px;
-        color: ${({ theme }) => theme.colors.lightDark};
-        text-align: center;
-    }
+    /* @media screen and (max-width: 768px) {
+    } */
 `;
 
-export const Or = styled.p`
-    color: ${({ theme }) => theme.colors.lightDark};
-    padding-top: 18%;
-    font-weight: 500;
-`;
-
-export const Title = styled.p`
-    font-weight: 600;
+export const ShareText = styled.p`
     color: ${({ theme }) => theme.colors.dark};
-    font-size: 30px;
-    margin-bottom: 10px;
-    @media screen and (max-width: 768px) {
-        display: ${({ isVisibleOnMobile }) => !isVisibleOnMobile && 'none'};
-    }
-`;
-
-export const StyledQRCodeSVG = styled(QRCodeSVG)`
-    width: 300px;
-    height: 300px;
-    padding: 13px;
-    border: 2px solid ${({ theme }) => theme.colors.lightPurple};
-    border-radius: 13px;
-
-    @media screen and (max-width: 768px) {
-        width: 70%;
-        height: auto;
-    }
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 20px;
 `;
 
 export const GameIDWrapper = styled.div`
     display: flex;
     gap: 10px;
-    margin-top: 70px;
-
+    margin-bottom: 60px;
     p {
         padding: 13px 20px;
         border-radius: 13px;
@@ -83,13 +44,92 @@ export const CopyGameIDButton = styled.button`
     align-items: center;
 `;
 
-export const Info = styled.p`
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 100px;
-    text-align: center;
+export const UsersInLobbyWrapper = styled.div`
+    padding: 20px;
+    border-radius: 13px;
+    border: 2px solid ${({ theme }) => theme.colors.lightPurple};
+    display: flex;
+    align-items: center;
+    gap: 50px;
+`;
+
+export const PlayerWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 180px;
+
+    p {
+        font-weight: 500;
+        color: ${({ theme }) => theme.colors.dark};
+    }
+`;
+
+export const UserAvatar = styled.img`
+    border-radius: 50%;
+    object-fit: cover;
+    width: 96px;
+    height: 96px;
+`;
+
+export const AvatarPlaceholder = styled.div`
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.colors.lightPurple};
+`;
+
+export const NamePlaceholder = styled.p`
+    border-radius: 13px;
+    height: 16px;
+    position: relative;
+
+    & i {
+        opacity: 0;
+        animation: dot 1.3s infinite;
+        animation-delay: 0s;
+    }
+
+    & i + i {
+        opacity: 0;
+        animation: dot 1.3s infinite;
+        animation-delay: 0.2s;
+    }
+
+    & i + i + i {
+        opacity: 0;
+        animation: dot 1.3s infinite;
+        animation-delay: 0.3s;
+    }
+
+    @keyframes dot {
+        0% {
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+`;
+
+export const Vs = styled.p`
+    color: ${({ theme }) => theme.colors.primary};
     font-weight: 500;
     font-size: 20px;
+`;
+
+export const StartGameButton = styled(StyledButton)`
+    margin-top: 40px;
+`;
+
+export const Player2Info = styled.p`
+    margin-top: 30px;
     color: ${({ theme }) => theme.colors.dark};
+    font-weight: 500;
 `;
