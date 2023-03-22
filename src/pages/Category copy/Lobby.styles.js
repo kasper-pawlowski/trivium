@@ -126,6 +126,7 @@ export const Vs = styled.p`
 
 export const StartGameButton = styled(StyledButton)`
     margin-top: 40px;
+    cursor: pointer;
 `;
 
 export const Player2Info = styled.p`

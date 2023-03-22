@@ -1,11 +1,14 @@
+import Loader from '@components/Loader/Loader';
 import { useUserAuth } from '@contexts/AuthContext';
 import { useGameCtx } from '@contexts/GameContext';
 import useCopyToClipboard from '@hooks/useCopyToClipboard';
 import { database } from '@services/firebase';
 import { child, get, onDisconnect, onValue, push, ref, remove, set, update } from 'firebase/database';
-import { Copy, CopySuccess } from 'iconsax-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Copy, CopySuccess, InfoCircle } from 'iconsax-react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
     CopyGameIDButton,
@@ -26,7 +29,6 @@ const Lobby = () => {
     const { gameID } = useParams();
     const { selectedCategory, quizData, setQuizData } = useGameCtx();
     const { copyUidToClipboard, copied } = useCopyToClipboard();
-    const [loading, isLoading] = useState(true);
     const { user } = useUserAuth();
     const navigate = useNavigate();
 
@@ -40,7 +42,7 @@ const Lobby = () => {
                     set(infoRef, {
                         gameID: gameID,
                         category: selectedCategory,
-                        status: 'init',
+                        screen: 'lobby',
                         creator: user.uid,
                     })
                         .then(() => {
@@ -58,13 +60,28 @@ const Lobby = () => {
 
     useEffect(() => {
         const addPlayerToGame = () => {
-            set(playerRef, user)
-                .then(() => {
-                    console.log(`addPlayerToGame: Succes`);
-                })
-                .catch((error) => {
-                    console.log(`addPlayerToGame: ${error}`);
+            get(ref(database, `${gameID}/players`)).then((snapshot) => {
+                let numPlayers = [];
+                snapshot.forEach((node) => {
+                    numPlayers.push(node.val());
                 });
+                if (numPlayers.length === 2) {
+                    toast('Lobby is full', {
+                        icon: <InfoCircle />,
+                        style: {
+                            border: '1px solid #EF8136',
+                            padding: '16px',
+                            backgroundColor: '#FEF7EC',
+                            color: '#EF8136',
+                        },
+                    });
+                    navigate('/');
+                } else {
+                    set(playerRef, user).catch((error) => {
+                        console.log(error);
+                    });
+                }
+            });
         };
         addPlayerToGame();
     }, [gameID]);
@@ -86,20 +103,32 @@ const Lobby = () => {
         });
     }, []);
 
-    const handleStartGame = () => {
-        const newPostKey = push(child(ref(database), 'status')).key;
-
-        const updates = {};
-        updates[`${gameID}/info/status`] = 'game';
-
-        update(ref(database), updates).then(() => {
-            navigate(`/game/${gameID}`);
+    useEffect(() => {
+        onValue(ref(database, `${gameID}/info/screen`), (snapshot) => {
+            const data = snapshot.val();
+            if (data === 'game') {
+                navigate(`/game/${gameID}`);
+            }
         });
+    }, []);
+
+    const handleStartGame = () => {
+        const updates = {};
+        updates[`${gameID}/info/screen`] = 'game';
+
+        update(ref(database), updates);
     };
 
     useEffect(() => {
         console.log('quizData:', quizData);
     }, [quizData]);
+
+    if (!quizData)
+        return (
+            <Wrapper>
+                <Loader variant="primary" />
+            </Wrapper>
+        );
 
     return (
         <Wrapper>
@@ -147,15 +176,25 @@ const Lobby = () => {
                     )}
                 </PlayerWrapper>
             </UsersInLobbyWrapper>
-            {quizData?.players.player1 &&
-                quizData?.players.player2 &&
-                (quizData?.info.creator === user.uid ? (
-                    <StartGameButton onClick={handleStartGame} variant="primary">
-                        Start Game
-                    </StartGameButton>
-                ) : (
-                    <Player2Info>Please wait for the creator to start the game</Player2Info>
-                ))}
+            <AnimatePresence>
+                {quizData?.players.player1 &&
+                    quizData?.players.player2 &&
+                    (quizData?.info.creator === user.uid ? (
+                        <StartGameButton
+                            onClick={handleStartGame}
+                            variant="primary"
+                            as={motion.div}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            transformOrigin="top right"
+                            transition={{ duration: 0.1 }}>
+                            Start Game
+                        </StartGameButton>
+                    ) : (
+                        <Player2Info>Please wait for the creator to start the game</Player2Info>
+                    ))}
+            </AnimatePresence>
         </Wrapper>
     );
 };

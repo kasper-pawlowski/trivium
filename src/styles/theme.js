@@ -10,6 +10,7 @@ export const theme = {
         lightPurple: '#e4e3f1',
         lightPurple2: '#EFEEFC',
         deepRed: '#660012',
+        lightRed: '#9E5C67',
         pink: '#FF8FA2',
         lightPink: '#ffeef1',
         green: '#62D346',

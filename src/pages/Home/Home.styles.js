@@ -42,7 +42,7 @@ export const TriviumDescription = styled.p`
     color: ${({ theme }) => theme.colors.lightPrimary};
     font-weight: 400;
     font-size: 17px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-align: center;
     @media screen and (max-width: 768px) {
         width: 100%;
