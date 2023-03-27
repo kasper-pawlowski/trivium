@@ -5,10 +5,10 @@ import { TopContainer, Wrapper } from './SoloGame.styles';
 import useSWR from 'swr';
 import Loader from '@components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
-import Round from '@pages/Round/Round';
-import RoundInfo from '@pages/RoundInfo/RoundInfo';
+import Round from '@pages/SoloGame/Round/Round';
+import RoundInfo from '@pages/SoloGame/RoundInfo/RoundInfo';
 import shuffleArray from '@helpers/shuffleArray';
-import GameSummary from '@pages/GameSummary/GameSummary';
+import GameSummary from '@pages/SoloGame/GameSummary/GameSummary';
 import UserQuizProgress from '@components/UserQuizProgress/UserQuizProgress';
 
 const SoloGame = () => {

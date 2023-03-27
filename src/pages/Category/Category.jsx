@@ -35,7 +35,7 @@ const Category = () => {
                 Play solo
             </StyledButton>
             <Seperator>Or</Seperator>
-            <StyledButton variant="primary" onClick={() => navigate(`/lobby/${gameID}`)}>
+            <StyledButton variant="primary" onClick={() => navigate(`/game/${gameID}`)}>
                 Challenge a friend
             </StyledButton>
         </Wrapper>

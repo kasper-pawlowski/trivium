@@ -1,13 +1,14 @@
 import Loader from '@components/Loader/Loader';
 import { useUserAuth } from '@contexts/AuthContext';
-import { useGameCtx } from '@contexts/GameContext';
+import { useMultiplayerCtx } from '@contexts/MultiplayerGameContext';
+import shuffleArray from '@helpers/shuffleArray';
 import useCopyToClipboard from '@hooks/useCopyToClipboard';
 import { database } from '@services/firebase';
-import { child, get, onDisconnect, onValue, push, ref, remove, set, update } from 'firebase/database';
+import axios from 'axios';
+import { get, ref, set, update } from 'firebase/database';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Copy, CopySuccess, InfoCircle } from 'iconsax-react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
@@ -26,37 +27,56 @@ import {
 } from './Lobby.styles';
 
 const Lobby = () => {
+    const { gameData } = useMultiplayerCtx();
     const { gameID } = useParams();
-    const { selectedCategory, quizData, setQuizData } = useGameCtx();
     const { copyUidToClipboard, copied } = useCopyToClipboard();
     const { user } = useUserAuth();
     const navigate = useNavigate();
+    const [loading, isLoading] = useState(true);
 
     const playerRef = ref(database, `${gameID}/players/${[user.uid]}`);
-    const infoRef = ref(database, `${gameID}/info`);
+    const quizDataRef = ref(database, `${gameID}/quizData`);
+    const gameRef = ref(database, `${gameID}/game`);
+
+    const mergeAnswers = (correctAnswer, incorrectAnswers) => {
+        const answers = Object.values(incorrectAnswers)
+            .concat(correctAnswer)
+            .map((answer) => {
+                return { answer: answer, isCorrect: answer === correctAnswer };
+            });
+        const shuffledAnswers = shuffleArray(answers);
+        return shuffledAnswers;
+    };
 
     useEffect(() => {
-        const initGame = () => {
-            get(infoRef).then((snapshot) => {
-                if (!snapshot.exists()) {
-                    set(infoRef, {
-                        gameID: gameID,
-                        category: selectedCategory,
-                        screen: 'lobby',
-                        creator: user.uid,
-                    })
-                        .then(() => {
-                            console.log(`Init Game: Succes`);
-                        })
-                        .catch((error) => {
-                            console.log(`Init Game: ${error}`);
-                        });
-                }
-            });
+        const fetchData = () => {
+            axios
+                .get(`https://opentdb.com/api.php?amount=5&category=${gameData?.info?.category?.id}&difficulty=easy&type=multiple`)
+                .then((response) => {
+                    const newQuizData = response.data.results.map((result) => {
+                        const answers = mergeAnswers(result.correct_answer, result.incorrect_answers);
+                        return {
+                            category: result.category,
+                            type: result.type,
+                            difficulty: result.difficulty,
+                            question: result.question,
+                            answers: answers,
+                        };
+                    });
+                    set(quizDataRef, newQuizData).catch((error) => console.log(error));
+                    set(gameRef, {
+                        currentRound: 1,
+                        timeLeft: 15,
+                    }).catch((error) => console.log(error));
+                    isLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         };
 
-        initGame();
-    }, [gameID, selectedCategory]);
+        fetchData();
+    }, [gameData?.info?.category?.id]);
 
     useEffect(() => {
         const addPlayerToGame = () => {
@@ -65,7 +85,8 @@ const Lobby = () => {
                 snapshot.forEach((node) => {
                     numPlayers.push(node.val());
                 });
-                if (numPlayers.length === 2) {
+                const alreadyAdded = numPlayers.some((player) => player.uid === user.uid);
+                if (!alreadyAdded && numPlayers.length === 2) {
                     toast('Lobby is full', {
                         icon: <InfoCircle />,
                         style: {
@@ -86,44 +107,14 @@ const Lobby = () => {
         addPlayerToGame();
     }, [gameID]);
 
-    useEffect(() => {
-        onDisconnect(playerRef).remove();
-    }, [gameID]);
-
-    useEffect(() => {
-        onValue(ref(database, gameID), (snapshot) => {
-            const data = snapshot.val();
-            setQuizData({
-                info: data?.info,
-                players: {
-                    player1: data?.players[user.uid],
-                    player2: data?.players[Object.keys(data.players).filter((key) => key !== user.uid)[0]],
-                },
-            });
-        });
-    }, []);
-
-    useEffect(() => {
-        onValue(ref(database, `${gameID}/info/screen`), (snapshot) => {
-            const data = snapshot.val();
-            if (data === 'game') {
-                navigate(`/game/${gameID}`);
-            }
-        });
-    }, []);
-
     const handleStartGame = () => {
         const updates = {};
-        updates[`${gameID}/info/screen`] = 'game';
+        updates[`${gameID}/info/screen`] = 'roundInfo';
 
         update(ref(database), updates);
     };
 
-    useEffect(() => {
-        console.log('quizData:', quizData);
-    }, [quizData]);
-
-    if (!quizData)
+    if (!gameData && !loading)
         return (
             <Wrapper>
                 <Loader variant="primary" />
@@ -141,10 +132,10 @@ const Lobby = () => {
             </GameIDWrapper>
             <UsersInLobbyWrapper>
                 <PlayerWrapper>
-                    {quizData?.players?.player1 ? (
+                    {gameData?.players?.player1 ? (
                         <>
-                            <UserAvatar src={quizData.players.player1.photoURL} alt="" draggable={false} />
-                            <p>{quizData.players.player1.displayName}</p>{' '}
+                            <UserAvatar src={gameData.players.player1.photoURL} alt="" draggable={false} />
+                            <p>{gameData.players.player1.displayName}</p>{' '}
                         </>
                     ) : (
                         <>
@@ -159,10 +150,10 @@ const Lobby = () => {
                 </PlayerWrapper>
                 <Vs>Vs</Vs>
                 <PlayerWrapper>
-                    {quizData?.players?.player2 ? (
+                    {gameData?.players?.player2 ? (
                         <>
-                            <UserAvatar src={quizData.players.player2.photoURL} alt="" draggable={false} />
-                            <p>{quizData.players.player2.displayName}</p>
+                            <UserAvatar src={gameData.players.player2.photoURL} alt="" draggable={false} />
+                            <p>{gameData.players.player2.displayName}</p>
                         </>
                     ) : (
                         <>
@@ -177,9 +168,9 @@ const Lobby = () => {
                 </PlayerWrapper>
             </UsersInLobbyWrapper>
             <AnimatePresence>
-                {quizData?.players.player1 &&
-                    quizData?.players.player2 &&
-                    (quizData?.info.creator === user.uid ? (
+                {gameData?.players.player1 &&
+                    gameData?.players.player2 &&
+                    (gameData?.info.creator === user.uid ? (
                         <StartGameButton
                             onClick={handleStartGame}
                             variant="primary"

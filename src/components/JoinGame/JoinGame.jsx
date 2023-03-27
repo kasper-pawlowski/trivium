@@ -18,7 +18,7 @@ const JoinGame = () => {
     const handleSubmit = () => {
         get(ref(database, value)).then((snapshot) => {
             if (snapshot.exists()) {
-                navigate(`/lobby/${value}`);
+                navigate(`/game/${value}`);
             } else {
                 setValue('');
                 toast("Game with this ID doesn't exists", {

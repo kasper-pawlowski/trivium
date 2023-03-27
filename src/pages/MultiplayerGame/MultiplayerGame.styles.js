@@ -1,3 +1,4 @@
+import StyledButton from '@components/StyledButton';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -5,6 +6,7 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
-    position: relative;
+
+    /* @media screen and (max-width: 768px) {
+    } */
 `;
